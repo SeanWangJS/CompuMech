@@ -1,0 +1,40 @@
+package com.haswalk.solver.fvm2d;
+
+import java.util.HashMap;
+
+import com.haswalk.solver.Solver;
+import com.haswalk.solver.SolverBuilder;
+import com.haswalk.solver.fvm2d.config.Config;
+
+public class FVM2DSolverBuilder implements SolverBuilder{
+
+	private Config config;
+	
+	@Override
+	public SolverBuilder parseConfig(String configJson) {
+		config = new Config();
+		config.parse(configJson);
+		config.initConfigs();
+		return this;
+	}
+
+	@Override
+	public Solver create() {
+
+		HashMap<Integer, Blueprint> blueprintMap = new HashMap<>();
+		config.getParts().forEach((partId, part) ->{
+			blueprintMap.put(partId, 
+						     Blueprint.strengthModelBlueprint.get(config.getMaterials()
+						    		 									 .get(part.getMaterialID())
+						    		 									 .getStrengthModelType()));
+		});
+		Assembler assembler = new Assembler(blueprintMap, config);
+		assembler.assemble();
+		FVM2DSolver solver = new FVM2DSolver();
+		solver.setProcessors(assembler.getProcessors());
+		assembler.getProcessors().forEach((name, p) -> {
+			System.out.println(name);
+		});
+		return solver;
+	}
+}
