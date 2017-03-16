@@ -22,7 +22,7 @@ public class ForceBoundaryApply extends LoadBoundaryApply{
 
 	public void calc() {
 		double value = load.apply(time.getCurrentTime());
-		forceX[applyNodeId] += value * Math.cos(angle / 180.0);
-		forceY[applyNodeId] += value * Math.sin(angle / 180.0);
+		forceX[applyNodeId] += value * Math.cos(angle / 180.0 * Math.PI);
+		forceY[applyNodeId] += value * Math.sin(angle / 180.0 * Math.PI);
 	}
 }

@@ -27,6 +27,11 @@ public class Mesh {
 		nodesN = mp.getSurrN();
 		
 	}
+	public String getWorkspace(){
+		String[] str = uri.split("/");
+		return uri.replaceAll("/" +  str[str.length - 1], "");
+		
+	}
 	
 	public List<double[]> getVertices(){
 		return vertices;

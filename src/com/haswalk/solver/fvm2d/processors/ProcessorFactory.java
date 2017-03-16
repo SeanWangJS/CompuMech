@@ -3,6 +3,8 @@ package com.haswalk.solver.fvm2d.processors;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
+import com.haswalk.solver.fvm2d.Blueprint;
 import com.haswalk.solver.fvm2d.annotation.Inject;
 import com.haswalk.solver.fvm2d.annotation.Injection;
 import com.haswalk.solver.fvm2d.components.Components;
@@ -10,12 +12,20 @@ import com.haswalk.solver.fvm2d.config.Config;
 
 public class ProcessorFactory {
 	
-	public Processor create(ProcessorCreationMethod method, Config config, HashMap<Integer, Components> componentsMap){
-		return method.invoke(config, componentsMap);
+	public Processor create(int partId, ProcessorCreationMethod method, Config config, HashMap<Integer, Components> componentsMap){
+		return method.invoke(partId, config, componentsMap);
 	}
 	
-	public Processor create(String name, Class<?> clazz, Components components) {
+	public Processor create(String name, Class<?> clazz, int partId, HashMap<Integer, Components> componentsMap,
+			Blueprint blueprint, Config config) {
+		
+		ProcessorCreationMethod md = blueprint.getProcessorCreationMap().get(name);
+		if(md != null) {
+			return md.invoke(partId, config, componentsMap);
+		}
+		
 		Processor processor = null;
+		Components components = componentsMap.get(partId);
 		try {
 			processor = (Processor) clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e1) {
@@ -72,6 +82,10 @@ public class ProcessorFactory {
 		}
 
 		return processor;
+	}
+
+	public Processor create(String name, Class<?> clazz, Components components) {
+		return null;
 	}
 
 }

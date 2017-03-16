@@ -20,7 +20,7 @@ public class TimeControl {
 	}
 	public static TimeControl create(){
 		if(timeControl == null) {
-			return new TimeControl();
+			timeControl = new TimeControl();
 		}
 		return timeControl;
 	}

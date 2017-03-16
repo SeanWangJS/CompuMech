@@ -7,6 +7,7 @@ import com.haswalk.solver.fvm2d.config.part.Mesh;
 public class Part {
 
 	private int materialID;
+	private int outputID;
 	private Mesh mesh;
 	private BoundaryCondtionApplyArea boundaryCondition;
 	private Gauge gauge;
@@ -20,7 +21,11 @@ public class Part {
 	public int getMaterialID() {
 		return materialID;
 	}
-
+	
+	public int getOutputID(){
+		return outputID;
+	}
+	
 	public Mesh getMesh() {
 		return mesh;
 	}

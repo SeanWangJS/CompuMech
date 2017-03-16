@@ -34,12 +34,12 @@ public class ProcessorFactoryTest {
 		Blueprint blueprint = new ElasticModelBlueprint();
 		
 		HashMap<Integer, Components> componentsMap = new HashMap<>();
-		ComponentFactory factory = new ComponentFactory(blueprint.getComponentBlueprint());
+		ComponentFactory factory = new ComponentFactory(blueprint.getComponentCreationMap());
 		config.getParts().forEach((partId, part) -> {
 			componentsMap.put(partId, factory.createAll(partId, config));
 		});
 		
-		TimestepUpdate tsu = (TimestepUpdate) new TimestepUpdateCreationMethod().invoke(config, componentsMap);
+		TimestepUpdate tsu = (TimestepUpdate) new TimestepUpdateCreationMethod().invoke(0, config, componentsMap);
 		System.out.println(tsu.toString());
 		tsu.calc();
 		System.out.println("current time: " + tsu.getCurrentTime());
@@ -48,7 +48,7 @@ public class ProcessorFactoryTest {
 	@Test
 	public void testDispUpdate(){
 		Blueprint blueprint = new ElasticModelBlueprint();
-		ComponentFactory factory = new ComponentFactory(blueprint.getComponentBlueprint());
+		ComponentFactory factory = new ComponentFactory(blueprint.getComponentCreationMap());
 		Components components = factory.createAll(1, config);
 		ProcessorFactory processorFactory = new ProcessorFactory();
 		processorFactory.create(Processor.DISP_UPDATE, DefaultDispUpdate.class, components);
@@ -57,7 +57,7 @@ public class ProcessorFactoryTest {
 	@Test
 	public void test2(){
 		Blueprint blueprint = new ElasticModelBlueprint();
-		ComponentFactory factory = new ComponentFactory(blueprint.getComponentBlueprint());
+		ComponentFactory factory = new ComponentFactory(blueprint.getComponentCreationMap());
 		Components components = factory.createAll(1, config);
 		ProcessorFactory processorFactory = new ProcessorFactory();
 		ListableMap<String, Processor> processors = new ListableMap<>();
@@ -65,20 +65,6 @@ public class ProcessorFactoryTest {
 			processors.put(name + "_" + 1, processorFactory.create(name, clazz, components));
 		});
 		processors.forEach((name, processor) -> System.out.println(name));
-	}
-	
-	@Test
-	public void test3(){
-		HashMap<Integer, Blueprint> blueprintMap = new HashMap<>();
-		config.getParts().forEach((partId, part) -> {
-			blueprintMap.put(partId, Blueprint.strengthModelBlueprint.get(config.getMaterials()
-																	             .get(part.getMaterialID())
-																	             .getStrengthModelType()));
-		});
-		HashMap<Integer, Components> componentsMap = new HashMap<>();
-		blueprintMap.forEach((partId, blueprint) -> {
-			
-		});
 	}
 	
 }

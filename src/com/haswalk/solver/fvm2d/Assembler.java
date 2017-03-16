@@ -7,6 +7,7 @@ import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.ProcessorFactory;
 import com.haswalk.solver.fvm2d.processors.creation.TimestepUpdateCreationMethod;
+import com.haswalk.solver.fvm2d.processors.extend.MessageUpdate;
 import com.haswalk.solver.fvm2d.util.ListableMap;
 
 public class Assembler {
@@ -28,21 +29,22 @@ public class Assembler {
 		
 		HashMap<Integer, Components> componentsMap = new HashMap<>();
 		blueprints.forEach((partId, blueprint) -> {
-			ComponentFactory componentFactory = new ComponentFactory(blueprint.getComponentBlueprint());
+			ComponentFactory componentFactory = new ComponentFactory(blueprint.getComponentCreationMap());
 			componentsMap.put(partId, componentFactory.createAll(partId, config));
 		});
 		
 		processors.put(Processor.TIMESTEP_UPDATE, 
-					   processorFactory.create(new TimestepUpdateCreationMethod(), 
+					   processorFactory.create(0, new TimestepUpdateCreationMethod(), 
 							   				   config, componentsMap)); 
 		
 		blueprints.forEach((partId, blueprint) -> {
-			Components components = componentsMap.get(partId);
 			blueprint.getProcessorMap().forEach((name, clazz) -> {
-				processors.put(name + "_" + partId, processorFactory.create(name, clazz, components));
+				processors.put(name + "_" + partId, processorFactory.create(name, clazz, partId, componentsMap, blueprint, config));
 			});
 		});
 		
+		processors.put("MessageUpdate", 
+				processorFactory.create("MessageUpdate", MessageUpdate.class, 1, componentsMap, blueprints.get(1), config));
 	}
 	public ListableMap<String, Processor> getProcessors() {
 		return processors;

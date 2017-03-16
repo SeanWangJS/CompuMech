@@ -16,7 +16,7 @@ import com.haswalk.solver.fvm2d.processors.support.TimestepUpdate;
 public class TimestepUpdateCreationMethod implements ProcessorCreationMethod{
 
 	@Override
-	public Processor invoke(Config config, HashMap<Integer, Components> componentsMap) {
+	public Processor invoke(int pid, Config config, HashMap<Integer, Components> componentsMap) {
 		TimestepUpdate tsu = new TimestepUpdate();
 		List<SinglePartTimestepUpdate> sptus = new ArrayList<>();
 		config.getParts().forEach((partId, part) -> {
@@ -27,7 +27,10 @@ public class TimestepUpdateCreationMethod implements ProcessorCreationMethod{
 												   part.getMesh().getElements(), 
 												   ((FieldData)componentsMap.get(partId)
 														   					 .get(Components.FIELD_DATA))
-												   						     .get(FieldData.ELEM_AREA)));
+												   						     .get(FieldData.ELEM_AREA),
+												   ((FieldData)componentsMap.get(partId)
+														     				 .get(Components.FIELD_DATA))
+														   	                 .get(FieldData.ELEM_CHAR_LEN)));
 		});
 		int id = (int) config.getParts().keySet().toArray()[0];
 		tsu.setTimeUpdaters(sptus);

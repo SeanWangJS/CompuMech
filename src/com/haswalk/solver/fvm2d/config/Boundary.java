@@ -1,7 +1,6 @@
 package com.haswalk.solver.fvm2d.config;
 
 import java.util.HashMap;
-import java.util.function.Function;
 
 import com.haswalk.solver.fvm2d.config.boundary.CForceLoadBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.StressLoadBoundary;
@@ -31,7 +30,7 @@ public class Boundary {
 	
 	public void init(){}
 	
-	public Function<Double, Double> getLoad(){
-		return null;
-	}
+//	public Function<Double, Double> getLoad(){
+//		return null;
+//	}
 }

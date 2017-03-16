@@ -12,10 +12,6 @@ public class BoundaryCondtionApplyArea {
 	private HashMap<Integer, double[][]> idLineMap;
 	
 	private HashMap<Integer, List<Integer>> applyNodesIdMap;
-	
-	public HashMap<Integer, double[][]> getIdLineMap() {
-		return idLineMap;
-	}
 
 	public void init(List<double[]> vertices){
 		applyNodesIdMap = new HashMap<>();
@@ -30,9 +26,9 @@ public class BoundaryCondtionApplyArea {
 		return bcids;
 	}
 	
-	public HashMap<Integer, List<Integer>> getApplyNodesIdMap() {
-		return applyNodesIdMap;
-	}
+//	public HashMap<Integer, List<Integer>> getApplyNodesIdMap() {
+//		return applyNodesIdMap;
+//	}
 	
 	public List<Integer> getApplyNodesId(int bid) {
 		return applyNodesIdMap.get(bid);

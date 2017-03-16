@@ -15,6 +15,7 @@ import com.haswalk.solver.fvm2d.config.Boundary;
 import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.config.Material;
 import com.haswalk.solver.fvm2d.config.Part;
+import com.haswalk.solver.fvm2d.config.boundary.LoadBoundary;
 import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
 import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
 import com.haswalk.solver.fvm2d.config.part.BoundaryCondtionApplyArea;
@@ -135,7 +136,7 @@ public class ConfigParserTest {
 	
 	@Before
 	public void before() throws IOException{
-		json = new String(Files.readAllBytes(Paths.get("E:/fvm/7/config.json")));
+		json = new String(Files.readAllBytes(Paths.get("E:/fvm/8/config.json")));
 		config = new Config();
 		config.parse(json);
 	}
@@ -156,7 +157,7 @@ public class ConfigParserTest {
 	
 	@Test
 	public void testFileLoad(){
-		Boundary boundary = config.getBoundaries().get(2);
+		LoadBoundary boundary = (LoadBoundary)config.getBoundaries().get(2);
 		System.out.println(boundary.toString());
 		boundary.init();
 		double value = boundary.getLoad().apply(2.0);
@@ -171,13 +172,13 @@ public class ConfigParserTest {
 		System.out.println(boundary.toString());
 		boundary.init();
 		DouArr.gen(0, 10, 0.1).stream().forEach(va -> {
-			System.out.println(va + ":" + boundary.getLoad().apply(va) + ":" + Math.sin(va));
+			System.out.println(va + ":" + ((LoadBoundary)boundary).getLoad().apply(va) + ":" + Math.sin(va));
 		});
 	}
 	
 	@Test
 	public void testPiecewiseLoad(){
-		Boundary boundary = config.getBoundaries().get(3);
+		LoadBoundary boundary = (LoadBoundary)config.getBoundaries().get(3);
 		System.out.println(boundary.toString());
 		boundary.init();
 		DouArr.gen(0, 2, 0.04).stream().forEach(va -> {

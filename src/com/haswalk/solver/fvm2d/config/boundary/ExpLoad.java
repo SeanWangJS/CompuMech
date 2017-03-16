@@ -1,5 +1,6 @@
 package com.haswalk.solver.fvm2d.config.boundary;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import com.udojava.evalex.Expression;
 
@@ -16,7 +17,7 @@ public class ExpLoad extends Load{
 				double[] interval = t[i];
 				if(interval[0] <= time && time <= interval[1]) {
 					findInInterval = true;
-					return new Expression(value[i]).with("t", String.valueOf((time * 180 / Math.PI))).eval().doubleValue();
+					return new Expression(value[i]).with("t", new BigDecimal(time * 180 / Math.PI)).eval().doubleValue();
 				}
 			}
 			if(!findInInterval) {

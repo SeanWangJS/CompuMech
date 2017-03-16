@@ -7,16 +7,19 @@ import com.haswalk.solver.fvm2d.components.creation.MaterialPropertyCreationMeth
 import com.haswalk.solver.fvm2d.components.creation.ModelDataCreationMethod;
 import com.haswalk.solver.fvm2d.components.creation.TimeControlCreationMethod;
 import com.haswalk.solver.fvm2d.processors.Processor;
-import com.haswalk.solver.fvm2d.processors.extend.MessageUpdate;
+import com.haswalk.solver.fvm2d.processors.creation.GaugerCreationMethod;
+import com.haswalk.solver.fvm2d.processors.creation.SaverCreationMethod;
+import com.haswalk.solver.fvm2d.processors.extend.NodeStressUpdate;
 import com.haswalk.solver.fvm2d.processors.support.AccUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultDispUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultForceUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultStrainUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultStressUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultVelUpdate;
-import com.haswalk.solver.fvm2d.processors.support.ElasticPressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.GroupUpdate;
+import com.haswalk.solver.fvm2d.processors.support.PsedoVisPressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.StressDevUpdate;
+import com.haswalk.solver.fvm2d.processors.support.SymmetricBCApplyUpdate;
 
 public class ElasticModelBlueprint extends Blueprint{
 
@@ -27,15 +30,18 @@ public class ElasticModelBlueprint extends Blueprint{
 		registComponentCreationMethod(Components.MATERIAL_PROPERTY, new MaterialPropertyCreationMethod());
 		
 		registProcessor(Processor.FORCE_UPDATE, DefaultForceUpdate.class);
+		registProcessor("SymmtricBCApplyUpdate", SymmetricBCApplyUpdate.class); 
 		registProcessor(Processor.ACC_UPDATE, AccUpdate.class);
 		registProcessor(Processor.VEL_UPDATE, DefaultVelUpdate.class);
 		registProcessor(Processor.DISP_UPDATE, DefaultDispUpdate.class);
 		registProcessor(Processor.GROUP_UPDATE, GroupUpdate.class);
 		registProcessor(Processor.STRAIN_UPDATE, DefaultStrainUpdate.class);
 		registProcessor(Processor.STRESS_DEV_UPDATE, StressDevUpdate.class);
-		registProcessor(Processor.PRESSURE_UPDATE, ElasticPressureUpdate.class);
+		registProcessor(Processor.PRESSURE_UPDATE, PsedoVisPressureUpdate.class);
 		registProcessor(Processor.STRESS_UPDATE, DefaultStressUpdate.class);
-		registProcessor("MessageUpdate", MessageUpdate.class);
+		registProcessorCreationMethod("Gauger", new GaugerCreationMethod());
+		registProcessorCreationMethod("Saver", new SaverCreationMethod());
+		registProcessor("NodeStressUpdate", NodeStressUpdate.class);
 	}
 	
 }

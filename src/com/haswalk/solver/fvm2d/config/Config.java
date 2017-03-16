@@ -2,7 +2,6 @@ package com.haswalk.solver.fvm2d.config;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -73,10 +72,6 @@ public class Config {
 
 	public HashMap<Integer, Output> getOutputs() {
 		return outputs;
-	}
-	
-	public List<String> getData1dNameAddtion(){
-		return null;
 	}
 	
 	public String toString(){

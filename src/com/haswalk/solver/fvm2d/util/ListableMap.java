@@ -16,13 +16,27 @@ public class ListableMap<K, V>{
 		list.set(index, new KVPair(key, value));
 		return this;
 	}
+	@SuppressWarnings("unchecked")
+	public <I> List<I> getWhichIsImplementationOf(Class<I> clazz) {
+		List<I> results = new ArrayList<>();
+		list.forEach(p -> {
+			V value = p.value;
+			Class<?>[] iterfs = value.getClass().getInterfaces();
+			for(Class<?> i : iterfs) {
+				if(clazz.equals(i)){
+					results.add((I)value);
+				}
+			}
+		});
+		return results;
+	}
 	
 	public V get(K key){
 		V v = null;
 		for(KVPair p:list) {
-			if(key == p.key) {
-				v = p.value;
-				break;
+//			if(key == p.key) {
+			if(key.equals(p.key)){
+				return p.value;
 			}
 		}
 		return v;

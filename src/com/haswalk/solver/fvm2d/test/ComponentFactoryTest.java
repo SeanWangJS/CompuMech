@@ -27,7 +27,7 @@ public class ComponentFactoryTest {
 	public void test1(){
 		Blueprint blueprint = new ElasticModelBlueprint();
 		
-		ComponentFactory cf = new ComponentFactory(blueprint.getComponentBlueprint());
+		ComponentFactory cf = new ComponentFactory(blueprint.getComponentCreationMap());
 		Components components = cf.createAll(1, config);
 		System.out.println(components.toString());
 	}

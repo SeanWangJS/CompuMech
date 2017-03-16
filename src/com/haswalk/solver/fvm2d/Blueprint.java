@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.haswalk.solver.fvm2d.blueprint.ElasticModelBlueprint;
 import com.haswalk.solver.fvm2d.components.ComponentCreationMethod;
+import com.haswalk.solver.fvm2d.processors.ProcessorCreationMethod;
 import com.haswalk.solver.fvm2d.util.ListableMap;
 
 public abstract class Blueprint {
@@ -18,6 +19,7 @@ public abstract class Blueprint {
 	
 	private ListableMap<String, Class<?>> processorMap = new ListableMap<>();
 	private ListableMap<String, ComponentCreationMethod> componentCreationMap = new ListableMap<>();
+	private ListableMap<String, ProcessorCreationMethod> processorCreationMap = new ListableMap<>();
 	
 	public Blueprint registProcessor(String name, Class<?> clazz){
 		processorMap.put(name, clazz);
@@ -27,17 +29,19 @@ public abstract class Blueprint {
 		componentCreationMap.put(name, method);
 		return this;
 	}
-
-	public Class<?> getProcessor(String name) {
-		return processorMap.get(name);
-	}
-	public ComponentCreationMethod getComponentCreationMethod(String name) {
-		return componentCreationMap.get(name);
+	public Blueprint registProcessorCreationMethod(String name, ProcessorCreationMethod method){
+		processorCreationMap.put(name, method);
+		processorMap.put(name, null);
+		return this;
 	}
 	public ListableMap<String, Class<?>> getProcessorMap(){
 		return processorMap;
 	}
-	public ListableMap<String, ComponentCreationMethod> getComponentBlueprint(){
+	public ListableMap<String, ComponentCreationMethod> getComponentCreationMap(){
 		return componentCreationMap;
 	}
+	public ListableMap<String, ProcessorCreationMethod> getProcessorCreationMap(){
+		return processorCreationMap;
+	}
+	
 }

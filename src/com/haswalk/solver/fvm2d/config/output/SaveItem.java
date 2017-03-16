@@ -1,16 +1,24 @@
 package com.haswalk.solver.fvm2d.config.output;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class SaveItem {
 	
 	private int inc;
-	private String[] items;
+	private List<String> items;
 	
+	public int getInc() {
+		return inc;
+	}
+
+	public List<String> getItems() {
+		return items;
+	}
+
 	public String toString() {
 		return new StringBuilder().append("save item: \n")
 			   .append("increment: " + inc + "\n")
-			   .append("items: " + Arrays.toString(items) + "\n")
+			   .append("items: " + items + "\n")
 			   .append("end").toString();
 	}
 	

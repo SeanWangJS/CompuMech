@@ -15,6 +15,7 @@ public class FVM2DSolverBuilder implements SolverBuilder{
 		config = new Config();
 		config.parse(configJson);
 		config.initConfigs();
+		System.out.println(config.toString());
 		return this;
 	}
 

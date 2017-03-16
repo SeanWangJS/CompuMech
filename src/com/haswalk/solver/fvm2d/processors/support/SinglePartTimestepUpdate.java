@@ -2,17 +2,19 @@ package com.haswalk.solver.fvm2d.processors.support;
 
 import java.util.List;
 
-import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.Geom;
+import com.haswalk.solver.fvm2d.util.Geom;
+
 
 public class SinglePartTimestepUpdate {
 	private double c;
 	private List<double[]> vertices;
 	private List<int[]> elements;
 	private double[] eArea;
+	private double[] charLen;
 	
-	public SinglePartTimestepUpdate(double c, List<double[]> vertices, List<int[]> elements, double[] eArea) {
+	public SinglePartTimestepUpdate(double c, List<double[]> vertices, List<int[]> elements, double[] eArea, double[] charLen) {
 		super();
+		this.charLen = charLen;
 		this.c = c;
 		this.vertices = vertices;
 		this.elements = elements;
@@ -21,13 +23,16 @@ public class SinglePartTimestepUpdate {
 
 	public double calc() {
 		int NOE = elements.size();
-		double[] data = new double[NOE];
+		double minLen = Double.MAX_VALUE;
 		for(int i = 0; i < NOE; i++) {
-			double d1 = Geom.dist(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[2]));
-			double d2 = Geom.dist(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[3]));
-			data[i] = eArea[i] / ((d1 > d2) ? d1 : d2);
+			double d1 = Geom.distSq(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[2]));
+			double d2 = Geom.distSq(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[3]));
+			charLen[i] = eArea[i] / Math.sqrt(((d1 > d2) ? d1 : d2));
+			if(minLen > charLen[i]) {
+				minLen = charLen[i];
+			}
 		}
-		return ArrUtil.min(data) / c;
+		return minLen / c;
 	}
 	
 	public String toString(){

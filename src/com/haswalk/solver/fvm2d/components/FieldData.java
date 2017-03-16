@@ -45,6 +45,7 @@ public class FieldData {
 	public final static String ELEM_STRESS_DEV_Y = "elem_stress_dev_y";
 	public final static String ELEM_STRESS_DEV_XY = "elem_stress_dev_xy";
 	public final static String ELEM_PRESSURE = "elem_pressure";
+	public final static String ELEM_CHAR_LEN = "elem_char_len";
 	
 	private HashMap<String, double[]> data1d = new HashMap<>();
 	private static List<String> data1dName = new ArrayList<>();
@@ -56,15 +57,21 @@ public class FieldData {
 				NODE_STRESS_X, NODE_STRESS_Y, NODE_STRESS_XY, NODE_MASS,
 				ELEM_MASS, ELEM_AREA, ELEM_AREA_LST, ELEM_DENSITY, ELEM_STRESS_X, ELEM_STRESS_Y, ELEM_STRESS_XY,
 				ELEM_STRAIN_X, ELEM_STRAIN_Y, ELEM_STRAIN_XY, ELEM_STRAIN_RATE_X, ELEM_STRAIN_RATE_Y, ELEM_STRAIN_RATE_XY, ELEM_STRESS_DEV_X,
-				ELEM_STRESS_DEV_Y, ELEM_STRESS_DEV_XY, ELEM_PRESSURE));
+				ELEM_STRESS_DEV_Y, ELEM_STRESS_DEV_XY, ELEM_PRESSURE, ELEM_CHAR_LEN));
 	}
 	
-	public FieldData(int NON, int NOE, List<String> data1dNameAddtion){
+	public FieldData(int NON, int NOE){
 		this.NOE = NOE;
 		this.NON = NON;
-		if(data1dNameAddtion != null)
-			data1dName.addAll(data1dNameAddtion);
 		init();
+	}
+	
+	public static void regist(String item){
+		data1dName.add(item);
+	}
+	
+	public void regist(String item, double[] d){
+		data1d.put(item, d);
 	}
 	
 	public String toString(){
@@ -83,6 +90,8 @@ public class FieldData {
 				data1d.put(item, new double[NON]);
 			}else if(isElemItem){
 				data1d.put(item, new double[NOE]);
+			}else{
+				System.err.println("Warning: illegal item name: " + item + ", please checkout if it is start with 'node' or 'elem'.");
 			}
 		});
 	}
