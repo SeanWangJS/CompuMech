@@ -24,7 +24,7 @@ public class ProcessorFactoryTest {
 	
 	@Before
 	public void before() throws IOException{
-		String json = new String(Files.readAllBytes(Paths.get("E:/fvm/7/config.json")));
+		String json = new String(Files.readAllBytes(Paths.get("E:/fvm/15/config.json")));
 		config = new Config();
 		config.parse(json);
 		config.initConfigs();

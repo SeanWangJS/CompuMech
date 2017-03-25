@@ -6,14 +6,16 @@ import com.haswalk.solver.fvm2d.config.Boundary;
 
 public class TransmitBoundary extends Boundary{
 
-	private String method;
-	private double[] outNorm;
+	protected double[] outNorm;
+	
+	public double[] getOutNorm() {
+		return outNorm;
+	}
 	
 	public String toString() {
 		return new StringBuilder()
 				.append("type: " + type + "\n")
-				.append("method: " + method +"\n")
-				.append("out norm: " + Arrays.toString(outNorm))
+				.append("out norm: " + Arrays.toString(outNorm)+"\n")
 				.toString();
 	}
 	

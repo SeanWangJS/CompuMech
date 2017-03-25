@@ -45,6 +45,8 @@ public class Assembler {
 		
 		processors.put("MessageUpdate", 
 				processorFactory.create("MessageUpdate", MessageUpdate.class, 1, componentsMap, blueprints.get(1), config));
+	
+		componentsMap.forEach((partId, components) -> System.out.println(components.toString()));
 	}
 	public ListableMap<String, Processor> getProcessors() {
 		return processors;

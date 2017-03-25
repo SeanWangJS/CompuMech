@@ -41,6 +41,7 @@ public class Material {
 	private StrengthModel strengthModel;
 	
 	private double cp;
+	private double cs;
 	private double K;
 	private double G;
 	
@@ -48,6 +49,7 @@ public class Material {
 		K = E / (3 * (1 - 2 * poissonRatio));
 		G = E / (2 * (1 + poissonRatio));
 		cp = Math.sqrt(( K + 4 / 3.0 * G)/ density); 
+		cs = Math.sqrt(G/density);
 	}
 	
 	
@@ -56,7 +58,7 @@ public class Material {
 	public String toString() {
 		return "Material \n[E=" + E + "\npoissonRatio=" + poissonRatio + "\ndensity=" + density + "\ndampingRatio="
 				+ dampingRatio + "\nnaturalFrequency=" + naturalFrequency + "\nstrengthModelType=" + strengthModelType
-				+ "\nstrengthModel=" + strengthModel + "\ncp=" + cp + "\nK=" + K + "\nG=" + G + "]";
+				+ "\nstrengthModel=" + strengthModel + "\ncp=" + cp + "\ncs=" +cs+"\nK=" + K + "\nG=" + G + "]";
 	}
 
 

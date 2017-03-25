@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
 import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
+import com.haswalk.solver.fvm2d.config.initiation.InitiationMethod;
+import com.haswalk.solver.fvm2d.util.ListableMap;
 
 public class Config {
 	
@@ -22,6 +24,8 @@ public class Config {
 	private HashMap<Integer, Part> parts;
 	private Control control;
 	private HashMap<Integer, Output> outputs;
+	
+	private ListableMap<String, InitiationMethod> initiationItems = new ListableMap<>();
 	
 	public void parse(String configStr){
 		materials = new HashMap<>();
@@ -52,6 +56,7 @@ public class Config {
 		materials.forEach((id, material) -> material.init());
 		boundaries.forEach((id, boundary) -> boundary.init());
 		parts.forEach((id, part) -> part.init());
+		initiationItems.forEach((name, method) -> method.invoke(this));
 	}
 	
 	public HashMap<Integer, Material> getMaterials() {
@@ -61,17 +66,30 @@ public class Config {
 	public HashMap<Integer, Boundary> getBoundaries() {
 		return boundaries;
 	}
+	
+	public Boundary getBoundary(int id) {
+		return boundaries.get(id);
+	}
 
 	public HashMap<Integer, Part> getParts() {
 		return parts;
 	}
 
+	public Part getPart(int id) {
+		return parts.get(id);
+	}
+	
 	public Control getControl() {
 		return control;
 	}
 
 	public HashMap<Integer, Output> getOutputs() {
 		return outputs;
+	}
+	
+	public Config registInitiationMethod(String name, InitiationMethod method) {
+		initiationItems.put(name, method);
+		return this;
 	}
 	
 	public String toString(){

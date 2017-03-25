@@ -14,6 +14,9 @@ public class Mesh {
 	private List<List<Integer>> nodesE;
 	private List<List<Integer>> nodesN;
 	
+	private int realNON;
+	private int realNOE;
+	
 	public String toString() {
 		return "mesh path: \n"+ uri +"\nend";
 	}
@@ -25,8 +28,22 @@ public class Mesh {
 		mp.handle();
 		nodesE = mp.getSurrE();
 		nodesN = mp.getSurrN();
+		this.realNOE = vertices.size();
+		this.realNOE = elements.size();
 		
 	}
+	
+	
+	
+	public void initWith(List<double[]> vertices, List<int[]> elements){
+		this.vertices = vertices;
+		this.elements = elements;
+		MeshProcessor mp = new MeshProcessor(vertices, elements);
+		mp.handle();
+		nodesE = mp.getSurrE();
+		nodesN = mp.getSurrN();
+	}
+	
 	public String getWorkspace(){
 		String[] str = uri.split("/");
 		return uri.replaceAll("/" +  str[str.length - 1], "");
@@ -53,5 +70,12 @@ public class Mesh {
 	}
 	public int getNOE(){
 		return elements.size(); 
+	}
+	
+	public int getRealNON() {
+		return realNON;
+	}
+	public int getRealNOE() {
+		return realNOE;
 	}
 }

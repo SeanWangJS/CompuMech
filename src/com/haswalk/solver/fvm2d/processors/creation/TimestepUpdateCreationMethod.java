@@ -19,6 +19,7 @@ public class TimestepUpdateCreationMethod implements ProcessorCreationMethod{
 	public Processor invoke(int pid, Config config, HashMap<Integer, Components> componentsMap) {
 		TimestepUpdate tsu = new TimestepUpdate();
 		List<SinglePartTimestepUpdate> sptus = new ArrayList<>();
+		
 		config.getParts().forEach((partId, part) -> {
 			sptus.add(new SinglePartTimestepUpdate(config.getMaterials()
 														 .get(part.getMaterialID())

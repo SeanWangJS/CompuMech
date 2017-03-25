@@ -10,6 +10,7 @@ import com.haswalk.solver.fvm2d.components.ModelData.BoundaryCondition;
 import com.haswalk.solver.fvm2d.config.Boundary;
 import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.config.boundary.CForceLoadBoundary;
+import com.haswalk.solver.fvm2d.config.boundary.PMLBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.StressLoadBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.SymmetricBoundary;
 
@@ -40,14 +41,19 @@ public class ModelDataCreationMethod implements ComponentCreationMethod{
 				bc.add(md.new StressBoundaryCondition(type, 
 												  b.getLoad(), 
 												  config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid)));
-			}else if(Boundary.TRANSMIT.equals(type)) {
-				bc.add(md.new TransmitBoundaryCondition(type));
 			}else if(Boundary.SYMMETRIC.equals(type)) {
 				SymmetricBoundary b = (SymmetricBoundary) config.getBoundaries().get(bcid);
 				bc.add(md.new SymmetricBoundaryCondition(type,
 														config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid),
 														b.getSymmetric()
 														));
+			}else if(Boundary.PERFECT_MATCHED_LAYER.equals(type)) {
+				PMLBoundary b = (PMLBoundary) config.getBoundaries().get(bcid);
+				bc.add(md.new PMLBoundaryCondition(type, 
+														config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid),
+														b.getDist(),
+														b.getPMLNodesIds(),
+														b.getDelta()));
 			}
 		});
 		

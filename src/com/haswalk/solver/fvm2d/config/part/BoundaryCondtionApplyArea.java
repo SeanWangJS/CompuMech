@@ -26,10 +26,6 @@ public class BoundaryCondtionApplyArea {
 		return bcids;
 	}
 	
-//	public HashMap<Integer, List<Integer>> getApplyNodesIdMap() {
-//		return applyNodesIdMap;
-//	}
-	
 	public List<Integer> getApplyNodesId(int bid) {
 		return applyNodesIdMap.get(bid);
 	}

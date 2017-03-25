@@ -1,10 +1,10 @@
 package com.haswalk.solver.fvm2d;
 
 import java.util.HashMap;
-
 import com.haswalk.solver.Solver;
 import com.haswalk.solver.SolverBuilder;
 import com.haswalk.solver.fvm2d.config.Config;
+import com.haswalk.solver.fvm2d.config.initiation.PMLBoundaryHandle;
 
 public class FVM2DSolverBuilder implements SolverBuilder{
 
@@ -13,6 +13,7 @@ public class FVM2DSolverBuilder implements SolverBuilder{
 	@Override
 	public SolverBuilder parseConfig(String configJson) {
 		config = new Config();
+		config.registInitiationMethod("PML", new PMLBoundaryHandle());
 		config.parse(configJson);
 		config.initConfigs();
 		System.out.println(config.toString());

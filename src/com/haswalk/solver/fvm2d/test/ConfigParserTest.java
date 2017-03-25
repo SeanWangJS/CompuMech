@@ -136,7 +136,7 @@ public class ConfigParserTest {
 	
 	@Before
 	public void before() throws IOException{
-		json = new String(Files.readAllBytes(Paths.get("E:/fvm/8/config.json")));
+		json = new String(Files.readAllBytes(Paths.get("E:/fvm/15/config.json")));
 		config = new Config();
 		config.parse(json);
 	}

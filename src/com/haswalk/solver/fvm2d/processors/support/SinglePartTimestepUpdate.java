@@ -3,6 +3,7 @@ package com.haswalk.solver.fvm2d.processors.support;
 import java.util.List;
 
 import com.haswalk.solver.fvm2d.util.Geom;
+import com.sean.wang.utils.FileIO;
 
 
 public class SinglePartTimestepUpdate {
@@ -12,6 +13,8 @@ public class SinglePartTimestepUpdate {
 	private double[] eArea;
 	private double[] charLen;
 	
+	private int NOE;
+	
 	public SinglePartTimestepUpdate(double c, List<double[]> vertices, List<int[]> elements, double[] eArea, double[] charLen) {
 		super();
 		this.charLen = charLen;
@@ -19,11 +22,12 @@ public class SinglePartTimestepUpdate {
 		this.vertices = vertices;
 		this.elements = elements;
 		this.eArea = eArea;
+		NOE = elements.size();
 	}
 
 	public double calc() {
-		int NOE = elements.size();
 		double minLen = Double.MAX_VALUE;
+		
 		for(int i = 0; i < NOE; i++) {
 			double d1 = Geom.distSq(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[2]));
 			double d2 = Geom.distSq(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[3]));

@@ -22,13 +22,6 @@ public class BoundaryDeserializer implements JsonDeserializer<Boundary> {
 
 		JsonObject boundaryJson = json.getAsJsonObject();
 		String type = boundaryJson.get("type").getAsString();
-//		Class<?> neededBoundaryClazz = null;
-//		if (Boundary.FORCE.equals(type) || Boundary.STRESS.equals(type)) {
-//			String loadType = boundaryJson.get("loadType").getAsString();
-//			neededBoundaryClazz = LoadBoundary.loadMap.get(loadType);
-//		} else {
-//			neededBoundaryClazz = Boundary.typeMap.get(type);
-//		}
 		
 		Class<?> neededBoundaryClazz = Boundary.typeMap.get(type);
 
@@ -45,6 +38,7 @@ public class BoundaryDeserializer implements JsonDeserializer<Boundary> {
 			String loadType = boundaryJson.get("loadType").getAsString();
 			Load load = (Load) gson.fromJson(boundaryJson.get("load"), LoadBoundary.loadMap.get(loadType));
 			((LoadBoundary)boundary).setLoad(load);
+			return boundary;
 		}
 		return boundary;
 	}
