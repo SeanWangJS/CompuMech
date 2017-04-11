@@ -12,6 +12,7 @@ public class ModelData {
 	public final static String NODES_AROUND_ELEM = "nodesAroundElem";
 	public final static String NODES_AROUDN_NODE = "nodesAroundNode";
 	public final static String GAUGE_NODES_ID = "gaugeNodesId";
+	public final static String BOUND_NODES_ID = "boundNodesId";
 	
 	public final static String BOUNDARY_CONDITION = "boundaryCondition";
 	

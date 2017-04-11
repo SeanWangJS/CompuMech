@@ -23,6 +23,7 @@ public class ModelDataCreationMethod implements ComponentCreationMethod{
 		md.put(ModelData.ELEMENTS, config.getParts().get(partId).getMesh().getElements());
 		md.put(ModelData.NODES_AROUDN_NODE, config.getParts().get(partId).getMesh().getNodesN());
 		md.put(ModelData.NODES_AROUND_ELEM, config.getParts().get(partId).getMesh().getNodesE());
+		md.put(ModelData.BOUND_NODES_ID, config.getParts().get(partId).getMesh().getBoundNodesId());
 		
 		List<BoundaryCondition> bc = new ArrayList<>();
 		List<Integer> ids = config.getParts().get(partId).getBoundaryCondition().getBcIds();

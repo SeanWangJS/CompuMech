@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.haswalk.solver.fvm2d.annotation.Component;
 import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.FileIO;
 import com.sean.wang.utils.Geom;
 import com.sean.wang.utils.LsUtil;
 

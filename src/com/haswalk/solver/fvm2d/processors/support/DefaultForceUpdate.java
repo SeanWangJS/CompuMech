@@ -14,6 +14,7 @@ import com.haswalk.solver.fvm2d.processors.support.force.StressBoundaryApply;
 import com.haswalk.solver.fvm2d.processors.support.force.ForceBoundaryApply;
 import com.haswalk.solver.fvm2d.processors.support.force.HourglassDamping;
 import com.haswalk.solver.fvm2d.processors.support.force.InternalForceUpdate;
+import com.haswalk.solver.fvm2d.processors.support.force.InternalForceUpdate2;
 
 import static com.haswalk.solver.fvm2d.components.ModelData.*;
 
@@ -39,8 +40,9 @@ public class DefaultForceUpdate implements ForceUpdate {
 	@Injection
 	public void set(FieldData fd, ModelData md, TimeControl tc) {
 		ifu = new InternalForceUpdate((List<double[]>) md.get(VERTICES), (List<int[]>) md.get(ELEMENTS),
-				(List<List<Integer>>) md.get(NODES_AROUND_ELEM), fd.get(FORCE_X), fd.get(FORCE_Y),
-				fd.get(ELEM_STRESS_X), fd.get(ELEM_STRESS_Y), fd.get(ELEM_STRESS_XY));
+				(List<List<Integer>>) md.get(NODES_AROUND_ELEM), 
+				fd.get(FORCE_X), fd.get(FORCE_Y), fd.get(ELEM_STRESS_X), fd.get(ELEM_STRESS_Y),
+				fd.get(ELEM_STRESS_XY));
 		hd = new HourglassDamping((List<int[]>) md.get(ELEMENTS), fd.get(FORCE_X), fd.get(FORCE_Y), fd.get(VEL_X),
 				fd.get(VEL_Y), fd.get(ELEM_MASS), tc);
 		bfs = new ArrayList<>();

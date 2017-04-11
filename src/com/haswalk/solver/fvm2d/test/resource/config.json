@@ -1,0 +1,79 @@
+{
+  'config':{
+    'materials':{
+	  '1':{
+	    'elasticModule': 37270000000,
+	    'poissonRatio': 0.24,
+	    'density': 2490,
+	    'dampingRatio': 0,
+	    'naturalFrequency': 0,
+	    'strengthModelType': 'elastic',
+	    'strengthModel': {
+		  'just': 1
+		} 
+	  }
+	  
+	},
+	
+	'boundaries': {
+	  '1':{
+	    'type':'stress',
+		'loadType':'piecewise',
+		'load':{
+		  't':[0, 0.015, 0.02],
+		  'value':[0, 4000000, 0]
+		}
+	  },
+	
+	  '2':{
+	    'type':'symmetric',
+		'symmetric': 'x'
+	  }
+	},
+	
+	'init': {
+
+	},
+	
+	'parts':{
+	  '1':{
+	    'materialID':1,
+		'outputID': 1, 
+	    'mesh':{
+		  'uri2': ['user.dir', '/src/com/haswalk/solver/fvm2d/test/resource/mesh.txt']
+		},
+	    'boundaryCondition':{
+	      'idLineMap':{
+		    '1':[[-50.0, -0.5],[-50.0, 0.5]],
+			'2':[[0.0, 0.5],[0.0, -0.5]]
+		  }
+	    },
+	    'gauge':{
+	      'fixed': false,
+		  'points': [[-30.0, 0.0]]
+	    }
+	  }
+	},
+	
+	'control': {
+	  'time':{
+	    'endTime': 0.02,
+  		'factor': 0.667
+	  }
+	},
+	
+	'outputs':{
+	  '1':{
+	    'save':{
+	      'inc':-1,
+	      'items':["node_stress_x", "node_stress_y"]
+	    },
+	    'gauge': {
+	      'inc':2,
+		  'items':["node_stress_x", "node_stress_y", "node_disp_x", "node_vel_x", "node_force_x"]
+	    }
+	  }
+	}
+	
+  }
+}

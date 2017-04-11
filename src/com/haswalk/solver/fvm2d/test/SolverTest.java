@@ -10,19 +10,14 @@ import org.junit.Test;
 import com.haswalk.solver.Solver;
 import com.haswalk.solver.fvm2d.FVM2DSolverBuilder;
 
-public class SolverBuilderTest {
+public class SolverTest {
 	private String json = null;
-	
 	@Before
 	public void before() throws IOException{
-		json = new String(Files.readAllBytes(Paths.get("E:/fvm/7/config.json")));
+//		Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json");
+//		json = new String(Files.readAllBytes(Paths.get("C:/Users/wangx/OneDrive/workspace/neon/solver/src/com/haswalk/solver/fvm2d/test/resource/config.json")));
+		json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json")));
 	}
-	@Test
-	public void test1(){
-		FVM2DSolverBuilder builder = new FVM2DSolverBuilder();
-		builder.parseConfig(json).create();
-	} 
-	
 	@Test
 	public void testSolve(){
 		FVM2DSolverBuilder builder = new FVM2DSolverBuilder();
