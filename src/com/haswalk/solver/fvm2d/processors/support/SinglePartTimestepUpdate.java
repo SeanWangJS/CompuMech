@@ -3,7 +3,6 @@ package com.haswalk.solver.fvm2d.processors.support;
 import java.util.List;
 
 import com.haswalk.solver.fvm2d.util.Geom;
-import com.sean.wang.utils.FileIO;
 
 
 public class SinglePartTimestepUpdate {

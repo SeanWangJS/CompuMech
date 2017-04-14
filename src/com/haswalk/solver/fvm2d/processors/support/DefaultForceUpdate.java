@@ -14,8 +14,6 @@ import com.haswalk.solver.fvm2d.processors.support.force.StressBoundaryApply;
 import com.haswalk.solver.fvm2d.processors.support.force.ForceBoundaryApply;
 import com.haswalk.solver.fvm2d.processors.support.force.HourglassDamping;
 import com.haswalk.solver.fvm2d.processors.support.force.InternalForceUpdate;
-import com.haswalk.solver.fvm2d.processors.support.force.InternalForceUpdate2;
-
 import static com.haswalk.solver.fvm2d.components.ModelData.*;
 
 import java.util.ArrayList;

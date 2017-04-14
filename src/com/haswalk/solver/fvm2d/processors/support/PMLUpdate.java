@@ -34,6 +34,7 @@ public class PMLUpdate implements Processor{
 			double d = dist[i];
 			double dampX = cp * 3 * vx[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
 			double dampY = cp * 3 * vy[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
+			
 			ax[nid] += dampX;
 			ay[nid] += dampY;
 			if(Math.abs(dampX) > Math.abs(damp)){
@@ -43,7 +44,7 @@ public class PMLUpdate implements Processor{
 				damp = dampY;
 			}
 		}
-		System.out.println(damp);
+//		System.out.println(damp);
 	}
 	
 }

@@ -40,7 +40,7 @@ public class Mesh {
 		nodesN = mp.getSurrN();
 		this.realNOE = vertices.size();
 		this.realNOE = elements.size();
-		boundSearch();
+//		boundSearch();
 	}
 	
 	public void initWith(List<double[]> vertices, List<int[]> elements){
@@ -50,7 +50,7 @@ public class Mesh {
 		mp.handle();
 		nodesE = mp.getSurrE();
 		nodesN = mp.getSurrN();
-		boundSearch();
+//		boundSearch();
 	}
 	
 	private void boundSearch() {

@@ -20,7 +20,6 @@ import com.haswalk.solver.fvm2d.processors.support.DefaultStressUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultVelUpdate;
 import com.haswalk.solver.fvm2d.processors.support.ElasticPressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.GroupUpdate;
-import com.haswalk.solver.fvm2d.processors.support.PsedoVisPressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.PsedoViscousUpdate;
 import com.haswalk.solver.fvm2d.processors.support.StressDevUpdate;
 import com.haswalk.solver.fvm2d.processors.support.SymmetricBCApplyUpdate;
@@ -42,7 +41,6 @@ public class ElasticModelBlueprint extends Blueprint{
 		registProcessor(Processor.GROUP_UPDATE, GroupUpdate.class);
 		registProcessor(Processor.STRAIN_UPDATE, DefaultStrainUpdate.class);
 		registProcessor(Processor.STRESS_DEV_UPDATE, StressDevUpdate.class);
-//		registProcessor(Processor.PRESSURE_UPDATE, PsedoVisPressureUpdate.class);
 		registProcessor(Processor.PRESSURE_UPDATE, ElasticPressureUpdate.class);
 //		registProcessor(Processor.PRESSURE_UPDATE, PolyNomiPressureUpdate.class);
 		registProcessor("PsedoViscousUpdate", PsedoViscousUpdate.class);
