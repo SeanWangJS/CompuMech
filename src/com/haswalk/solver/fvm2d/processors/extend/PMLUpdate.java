@@ -1,4 +1,4 @@
-package com.haswalk.solver.fvm2d.processors.support;
+package com.haswalk.solver.fvm2d.processors.extend;
 
 import com.haswalk.solver.fvm2d.processors.Processor;
 

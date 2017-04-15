@@ -25,8 +25,9 @@ import com.haswalk.solver.fvm2d.processors.support.SymmetricBCApplyUpdate;
 public class ElasticModelBlueprint extends Blueprint{
 
 	public ElasticModelBlueprint(){
-		registComponentCreationMethod(Components.FIELD_DATA, new FieldDataCreationMethod());
+		
 		registComponentCreationMethod(Components.MODEL_DATA, new ModelDataCreationMethod());
+		registComponentCreationMethod(Components.FIELD_DATA, new FieldDataCreationMethod());
 		registComponentCreationMethod(Components.TIME_CONTROL, new TimeControlCreationMethod());
 		registComponentCreationMethod(Components.MATERIAL_PROPERTY, new MaterialPropertyCreationMethod());
 		
@@ -39,7 +40,6 @@ public class ElasticModelBlueprint extends Blueprint{
 		registProcessor(Processor.STRAIN_UPDATE, DefaultStrainUpdate.class);
 		registProcessor(Processor.STRESS_DEV_UPDATE, StressDevUpdate.class);
 		registProcessor(Processor.PRESSURE_UPDATE, ElasticPressureUpdate.class);
-//		registProcessor(Processor.PRESSURE_UPDATE, PolyNomiPressureUpdate.class);
 		registProcessor("PsedoViscousUpdate", PsedoViscousUpdate.class);
 		registProcessor(Processor.STRESS_UPDATE, DefaultStressUpdate.class);
 		registProcessorCreationMethod("Gauger", new GaugerCreationMethod());

@@ -30,8 +30,4 @@ public class Boundary implements Initiation{
 	}
 	
 	public void init(){}
-	
-//	public Function<Double, Double> getLoad(){
-//		return null;
-//	}
 }
