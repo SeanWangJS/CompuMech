@@ -1,12 +1,15 @@
 package com.haswalk.solver.fvm2d.config;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
+import com.haswalk.solver.fvm2d.config.initiation.InitiationMethod;
 import com.haswalk.solver.fvm2d.util.Initiation;
 
 public class Config {
@@ -16,6 +19,7 @@ public class Config {
 	
 	private HashMap<String, Object> configItem = new HashMap<>();
 	private HashMap<String, Type> itemType = new HashMap<>();
+	private List<InitiationMethod> initMethods = new ArrayList<>(); 
 	
 	public void parse(String configStr) {
 		gson = builder.setPrettyPrinting().create();
@@ -37,6 +41,7 @@ public class Config {
 				});
 			}
 		});
+		initMethods.forEach(method -> method.invoke(this));
 	}
 	
 	public Config registConfigItem(String name, Object item) {
@@ -51,6 +56,11 @@ public class Config {
 	
 	public Config registDeserializer(Class<?> clazz, JsonDeserializer<?> deserializer) {
 		builder.registerTypeAdapter(clazz, deserializer);
+		return this;
+	}
+	
+	public Config registInitiationMethod(InitiationMethod method) {
+		initMethods.add(method);
 		return this;
 	}
 	

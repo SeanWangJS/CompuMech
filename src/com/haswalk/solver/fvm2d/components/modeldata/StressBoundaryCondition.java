@@ -1,4 +1,4 @@
-package com.haswalk.solver.fvm2d.components.modedata;
+package com.haswalk.solver.fvm2d.components.modeldata;
 
 import java.util.List;
 import java.util.function.Function;

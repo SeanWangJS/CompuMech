@@ -6,9 +6,10 @@ import java.util.List;
 
 import com.haswalk.solver.fvm2d.components.creation.modeldata.boundary.BoundaryConditionCreationMethod;
 import com.haswalk.solver.fvm2d.components.creation.modeldata.boundary.ForceBoundaryConditionCreation;
+import com.haswalk.solver.fvm2d.components.creation.modeldata.boundary.PMLBoundaryConditionCreation;
 import com.haswalk.solver.fvm2d.components.creation.modeldata.boundary.StressBoundaryConditionCreation;
 import com.haswalk.solver.fvm2d.components.creation.modeldata.boundary.SymmetricBoundaryConditionCreation;
-import com.haswalk.solver.fvm2d.components.modedata.BoundaryCondition;
+import com.haswalk.solver.fvm2d.components.modeldata.BoundaryCondition;
 import com.haswalk.solver.fvm2d.config.Boundary;
 import com.haswalk.solver.fvm2d.config.Config;
 
@@ -20,6 +21,7 @@ public class BoundaryCreation implements ModelDataAttributeCreationMethod{
 		regist(Boundary.FORCE, new ForceBoundaryConditionCreation());
 		regist(Boundary.STRESS, new StressBoundaryConditionCreation());
 		regist(Boundary.SYMMETRIC, new SymmetricBoundaryConditionCreation());
+		regist(Boundary.PERFECT_MATCHED_LAYER, new PMLBoundaryConditionCreation());
 	}
 	
 	@Override
@@ -31,12 +33,7 @@ public class BoundaryCreation implements ModelDataAttributeCreationMethod{
 		
 		idTypeMap.forEach((bcId, type) -> {
 			bc.add(methods.get(type).invoke(bcId, partId, config));
-//				PMLBoundary b = (PMLBoundary) config.getBoundaries().get(bcid);
-//				bc.add(md.new PMLBoundaryCondition(type, 
-//														config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid),
-//														b.getDist(),
-//														b.getPMLNodesIds(),
-//														b.getDelta()));
+
 		});
 		return bc;
 	}

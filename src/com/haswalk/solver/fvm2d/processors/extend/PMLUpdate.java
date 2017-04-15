@@ -27,23 +27,24 @@ public class PMLUpdate implements Processor{
 
 	@Override
 	public void calc() {
+		System.out.println("pml");
 		int NOPMLN = PMLNode.length;
 		double damp = Double.MIN_VALUE;
-		for(int i = 0; i < NOPMLN; i++) {
-			int nid = PMLNode[i];
-			double d = dist[i];
-			double dampX = cp * 3 * vx[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
-			double dampY = cp * 3 * vy[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
-			
-			ax[nid] += dampX;
-			ay[nid] += dampY;
-			if(Math.abs(dampX) > Math.abs(damp)){
-				damp = dampX;
-			}
-			if(Math.abs(dampY) > Math.abs(damp)) {
-				damp = dampY;
-			}
-		}
+//		for(int i = 0; i < NOPMLN; i++) {
+//			int nid = PMLNode[i];
+//			double d = dist[i];
+//			double dampX = cp * 3 * vx[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
+//			double dampY = cp * 3 * vy[i] / (2 * delta) * Math.log10(1 / R) * Math.pow(d / delta, 2);
+//			
+//			ax[nid] += dampX;
+//			ay[nid] += dampY;
+//			if(Math.abs(dampX) > Math.abs(damp)){
+//				damp = dampX;
+//			}
+//			if(Math.abs(dampY) > Math.abs(damp)) {
+//				damp = dampY;
+//			}
+//		}
 //		System.out.println(damp);
 	}
 	

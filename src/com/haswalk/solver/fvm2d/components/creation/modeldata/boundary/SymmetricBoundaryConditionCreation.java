@@ -1,7 +1,7 @@
 package com.haswalk.solver.fvm2d.components.creation.modeldata.boundary;
 
-import com.haswalk.solver.fvm2d.components.modedata.BoundaryCondition;
-import com.haswalk.solver.fvm2d.components.modedata.SymmetricBoundaryCondition;
+import com.haswalk.solver.fvm2d.components.modeldata.BoundaryCondition;
+import com.haswalk.solver.fvm2d.components.modeldata.SymmetricBoundaryCondition;
 import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.config.boundary.SymmetricBoundary;
 

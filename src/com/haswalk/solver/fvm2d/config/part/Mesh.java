@@ -40,17 +40,6 @@ public class Mesh {
 		this.realNOE = elements.size();
 //		boundSearch();
 	}
-	
-//	public void initWith(List<double[]> vertices, List<int[]> elements){
-//		this.vertices = vertices;
-//		this.elements = elements;
-//		MeshProcessor mp = new MeshProcessor(vertices, elements);
-//		mp.handle();
-//		nodesE = mp.getSurrE();
-//		nodesN = mp.getSurrN();
-////		boundSearch();
-//	}
-	
 //	private void boundSearch() {
 //		boundNodesId = new ArrayList<>();
 //		for(int i = 0, len = nodesE.size(); i < len; i++) {

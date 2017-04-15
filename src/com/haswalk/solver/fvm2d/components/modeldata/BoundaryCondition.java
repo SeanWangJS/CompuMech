@@ -1,4 +1,4 @@
-package com.haswalk.solver.fvm2d.components.modedata;
+package com.haswalk.solver.fvm2d.components.modeldata;
 
 public abstract class BoundaryCondition {
 	protected String type;

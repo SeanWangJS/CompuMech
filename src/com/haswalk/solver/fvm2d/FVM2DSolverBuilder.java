@@ -13,6 +13,7 @@ import com.haswalk.solver.fvm2d.config.Output;
 import com.haswalk.solver.fvm2d.config.Part;
 import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
 import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
+import com.haswalk.solver.fvm2d.config.initiation.PMLBoundaryInitiation;
 
 public class FVM2DSolverBuilder implements SolverBuilder{
 
@@ -34,8 +35,8 @@ public class FVM2DSolverBuilder implements SolverBuilder{
 		  .registItemType("outputs", new TypeToken<HashMap<Integer, Output>>(){}.getType());
 		config.registDeserializer(Material.class, new MaterialDeserializer())
 		  .registDeserializer(Boundary.class, new BoundaryDeserializer());
+		config.registInitiationMethod(new PMLBoundaryInitiation());
 		
-//		config.registInitiationMethod("PML", new PMLBoundaryHandle());
 		config.parse(configJson);
 		config.initConfigs();
 		System.out.println(config.toString());

@@ -5,8 +5,8 @@ import java.util.List;
 import com.haswalk.solver.fvm2d.annotation.Injection;
 import com.haswalk.solver.fvm2d.components.FieldData;
 import com.haswalk.solver.fvm2d.components.ModelData;
-import com.haswalk.solver.fvm2d.components.modedata.BoundaryCondition;
-import com.haswalk.solver.fvm2d.components.modedata.SymmetricBoundaryCondition;
+import com.haswalk.solver.fvm2d.components.modeldata.BoundaryCondition;
+import com.haswalk.solver.fvm2d.components.modeldata.SymmetricBoundaryCondition;
 import com.haswalk.solver.fvm2d.config.Boundary;
 import com.haswalk.solver.fvm2d.processors.Processor;
 

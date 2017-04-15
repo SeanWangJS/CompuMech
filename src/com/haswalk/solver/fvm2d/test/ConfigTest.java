@@ -17,6 +17,7 @@ import com.haswalk.solver.fvm2d.config.Output;
 import com.haswalk.solver.fvm2d.config.Part;
 import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
 import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
+import com.haswalk.solver.fvm2d.config.initiation.PMLBoundaryInitiation;
 
 public class ConfigTest {
 	
@@ -46,5 +47,28 @@ public class ConfigTest {
 		config.initConfigs();
 		System.out.println(config.toString());
 			  
+	}
+	
+	@Test
+	public void testPML() throws IOException {
+		String json = new String(Files.readAllBytes(Paths.get("E:/fvm/15/config.json")));
+		Config config = new Config();
+		config.registConfigItem("boundaries", new HashMap<>())
+			  .registConfigItem("materials", new HashMap<>())
+			  .registConfigItem("parts", new HashMap<>())
+			  .registConfigItem("control", new Control())
+			  .registConfigItem("outputs", new HashMap<>());
+		config.registItemType("boundaries", new TypeToken<HashMap<Integer, Boundary>>(){}.getType())
+			  .registItemType("materials", new TypeToken<HashMap<Integer, Material>>(){}.getType())
+			  .registItemType("parts", new TypeToken<HashMap<Integer, Part>>(){}.getType())
+			  .registItemType("control", new TypeToken<Control>(){}.getType())
+			  .registItemType("outputs", new TypeToken<HashMap<Integer, Output>>(){}.getType());
+		config.registDeserializer(Material.class, new MaterialDeserializer())
+			  .registDeserializer(Boundary.class, new BoundaryDeserializer());
+		config.registInitiationMethod(new PMLBoundaryInitiation());
+		
+		config.parse(json);
+		config.initConfigs();
+		System.out.println(config.toString());
 	}
 }
