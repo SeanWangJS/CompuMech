@@ -6,8 +6,9 @@ import com.haswalk.solver.fvm2d.config.boundary.CForceLoadBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.PMLBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.StressLoadBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.SymmetricBoundary;
+import com.haswalk.solver.fvm2d.util.Initiation;
 
-public class Boundary {
+public class Boundary implements Initiation{
 
 	public final static String FORCE = "force";
 	public final static String STRESS = "stress";

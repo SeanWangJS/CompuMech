@@ -10,7 +10,6 @@ import com.haswalk.solver.fvm2d.components.ModelData.BoundaryCondition;
 import com.haswalk.solver.fvm2d.config.Boundary;
 import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.config.boundary.CForceLoadBoundary;
-import com.haswalk.solver.fvm2d.config.boundary.PMLBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.StressLoadBoundary;
 import com.haswalk.solver.fvm2d.config.boundary.SymmetricBoundary;
 
@@ -23,7 +22,7 @@ public class ModelDataCreationMethod implements ComponentCreationMethod{
 		md.put(ModelData.ELEMENTS, config.getParts().get(partId).getMesh().getElements());
 		md.put(ModelData.NODES_AROUDN_NODE, config.getParts().get(partId).getMesh().getNodesN());
 		md.put(ModelData.NODES_AROUND_ELEM, config.getParts().get(partId).getMesh().getNodesE());
-		md.put(ModelData.BOUND_NODES_ID, config.getParts().get(partId).getMesh().getBoundNodesId());
+//		md.put(ModelData.BOUND_NODES_ID, config.getParts().get(partId).getMesh().getBoundNodesId());
 		
 		List<BoundaryCondition> bc = new ArrayList<>();
 		List<Integer> ids = config.getParts().get(partId).getBoundaryCondition().getBcIds();
@@ -49,12 +48,12 @@ public class ModelDataCreationMethod implements ComponentCreationMethod{
 														b.getSymmetric()
 														));
 			}else if(Boundary.PERFECT_MATCHED_LAYER.equals(type)) {
-				PMLBoundary b = (PMLBoundary) config.getBoundaries().get(bcid);
-				bc.add(md.new PMLBoundaryCondition(type, 
-														config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid),
-														b.getDist(),
-														b.getPMLNodesIds(),
-														b.getDelta()));
+//				PMLBoundary b = (PMLBoundary) config.getBoundaries().get(bcid);
+//				bc.add(md.new PMLBoundaryCondition(type, 
+//														config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcid),
+//														b.getDist(),
+//														b.getPMLNodesIds(),
+//														b.getDelta()));
 			}
 		});
 		

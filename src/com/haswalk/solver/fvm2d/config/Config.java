@@ -5,110 +5,105 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
-import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
-import com.haswalk.solver.fvm2d.config.initiation.InitiationMethod;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.fvm2d.util.Initiation;
 
 public class Config {
 	
-	private Gson gson = new GsonBuilder()
-			.registerTypeAdapter(Material.class, new MaterialDeserializer())
-			.registerTypeAdapter(Boundary.class, new BoundaryDeserializer())
-			.setPrettyPrinting().create();
+	private GsonBuilder builder = new GsonBuilder();
+	private Gson gson;
 	
-	private HashMap<Integer, Material> materials;
-	private HashMap<Integer, Boundary> boundaries;
-	private HashMap<Integer, Part> parts;
-	private Control control;
-	private HashMap<Integer, Output> outputs;
+	private HashMap<String, Object> configItem = new HashMap<>();
+	private HashMap<String, Type> itemType = new HashMap<>();
 	
-	private ListableMap<String, InitiationMethod> initiationItems = new ListableMap<>();
-	
-	public void parse(String configStr){
-		materials = new HashMap<>();
-		boundaries = new HashMap<>();
-		parts = new HashMap<>();
-		
+	public void parse(String configStr) {
+		gson = builder.setPrettyPrinting().create();
 		JsonObject json = gson.fromJson(configStr, JsonObject.class);
 		JsonObject configJson = json.get("config").getAsJsonObject();
 		
-		Type type1 = new TypeToken<HashMap<Integer, Material>>(){}.getType();
-		Type type2 = new TypeToken<HashMap<Integer, Boundary>>(){}.getType();
-		Type type3 = new TypeToken<HashMap<Integer, Part>>(){}.getType();
-		Type type4 = new TypeToken<HashMap<Integer, Output>>(){}.getType();
-		
-		materials = gson.fromJson(configJson.get("materials"), type1);
-
-		boundaries = gson.fromJson(configJson.get("boundaries"), type2);
-
-		parts = gson.fromJson(configJson.get("parts"), type3);
-		
-		control = gson.fromJson(configJson.get("control"), Control.class);
-		
-		outputs = gson.fromJson(configJson.get("outputs"), type4);
-		
+		itemType.forEach((name, type) -> {
+			configItem.put(name, gson.fromJson(configJson.get(name), type));
+		});
 	}
 
 	public void initConfigs() {
-		materials.forEach((id, material) -> material.init());
-		boundaries.forEach((id, boundary) -> boundary.init());
-		parts.forEach((id, part) -> part.init());
-		initiationItems.forEach((name, method) -> method.invoke(this));
+		configItem.forEach((name, item) -> {
+			if(item instanceof HashMap) {
+				((HashMap<?,?>) item).forEach((id, val) -> {
+					if(val instanceof Initiation) {
+						((Initiation)val).init();
+					}
+				});
+			}
+		});
 	}
 	
-	public HashMap<Integer, Material> getMaterials() {
-		return materials;
-	}
-
-	public HashMap<Integer, Boundary> getBoundaries() {
-		return boundaries;
-	}
-	
-	public Boundary getBoundary(int id) {
-		return boundaries.get(id);
-	}
-
-	public HashMap<Integer, Part> getParts() {
-		return parts;
-	}
-
-	public Part getPart(int id) {
-		return parts.get(id);
-	}
-	
-	public Control getControl() {
-		return control;
-	}
-
-	public HashMap<Integer, Output> getOutputs() {
-		return outputs;
-	}
-	
-	public Config registInitiationMethod(String name, InitiationMethod method) {
-		initiationItems.put(name, method);
+	public Config registConfigItem(String name, Object item) {
+		configItem.put(name, item);
 		return this;
 	}
 	
-	public String toString(){
+	public Config registItemType(String name, Type type) {
+		itemType.put(name, type);
+		return this;
+	}
+	
+	public Config registDeserializer(Class<?> clazz, JsonDeserializer<?> deserializer) {
+		builder.registerTypeAdapter(clazz, deserializer);
+		return this;
+	}
+	
+	public Object get(String name) {
+		return configItem.get(name);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object get(String name, int id) {
+		HashMap<Integer, ?> item;
+		try{
+			 item = (HashMap<Integer, ?>) configItem.get(name);
+		}catch(Exception e) {
+			throw new RuntimeException("Error: " + name + " is not a hashmap");
+		}
+		return item.get(id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<Integer, Material> getMaterials() {
+		return (HashMap<Integer, Material>)configItem.get("materials");
+	}
+	@SuppressWarnings("unchecked")
+	public HashMap<Integer, Boundary> getBoundaries() {
+		return (HashMap<Integer, Boundary>)configItem.get("boundaries");
+	}
+	@SuppressWarnings("unchecked")
+	public HashMap<Integer, Part> getParts() {
+		return (HashMap<Integer, Part>)configItem.get("parts");
+	}
+	@SuppressWarnings("unchecked")
+	public Boundary getBoundary(int id) {
+		return (Boundary)((HashMap<Integer, Boundary>)configItem.get("boundaries")).get(id);
+	}
+	@SuppressWarnings("unchecked")
+	public Part getPart(int id) {
+		return (Part)((HashMap<Integer, Part>)configItem.get("parts")).get(id);
+	}
+	public Control getControl() {
+		return (Control) configItem.get("control");
+	}
+	@SuppressWarnings("unchecked")
+	public HashMap<Integer, Output> getOutputs() {
+		return (HashMap<Integer, Output>)configItem.get("outputs");
+	}
+	
+	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Materials----------------------------------\n");
-		getMaterials().forEach((id, material)-> builder.append(id + "\n" + material.toString() + "\n"));
-		builder.append("Materials End------------------------------\n");
-		builder.append("Boundaries---------------------------------\n");
-		getBoundaries().forEach((id, boundary) -> builder.append(id + "\n" + boundary.toString()));
-		builder.append("Boundaries End-----------------------------\n");
-		builder.append("Parts--------------------------------------\n");
-		getParts().forEach((id, part) -> builder.append(id + "\n" + part.toString()));
-		builder.append("Parts End----------------------------------\n");
-		builder.append("Control------------------------------------\n");
-		builder.append(getControl() + "\n");
-		builder.append("Control End--------------------------------\n");
-		builder.append("Outputs------------------------------------\n");
-		getOutputs().forEach((id, output) -> builder.append(id + "\n" + output.toString()));
-		builder.append("Outputs End--------------------------------\n");
+		configItem.forEach((name, item) -> {
+			builder.append(name + "-------------------------------\n")
+				   .append(item.toString() + "\n")
+				   .append("End " + name + "--------------------------\n");
+		});
 		return builder.toString();
 	}
 }

@@ -1,8 +1,6 @@
 package com.haswalk.solver.fvm2d.components;
 
-import com.haswalk.solver.fvm2d.annotation.Component;
 
-@Component
 public class TimeControl {
 
 	private double endTime;

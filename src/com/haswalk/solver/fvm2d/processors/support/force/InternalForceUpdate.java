@@ -2,10 +2,8 @@ package com.haswalk.solver.fvm2d.processors.support.force;
 
 import java.util.List;
 
-import com.haswalk.solver.fvm2d.annotation.Component;
 import com.sean.wang.utils.ArrUtil;
 
-@Component
 public class InternalForceUpdate {
 
 	private List<double[]> vertices;

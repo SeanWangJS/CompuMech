@@ -1,9 +1,7 @@
 package com.haswalk.solver.fvm2d.config.part;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.sean.wang.utils.ArrUtil;
 import com.sean.wang.utils.FileIO;
 import com.sean.wang.utils.mesh.MeshProcessor;
 
@@ -16,7 +14,7 @@ public class Mesh {
 	private List<int[]> elements;
 	private List<List<Integer>> nodesE;
 	private List<List<Integer>> nodesN;
-	private List<Integer> boundNodesId; 
+//	private List<Integer> boundNodesId; 
 	
 	private int realNON;
 	private int realNOE;
@@ -43,33 +41,33 @@ public class Mesh {
 //		boundSearch();
 	}
 	
-	public void initWith(List<double[]> vertices, List<int[]> elements){
-		this.vertices = vertices;
-		this.elements = elements;
-		MeshProcessor mp = new MeshProcessor(vertices, elements);
-		mp.handle();
-		nodesE = mp.getSurrE();
-		nodesN = mp.getSurrN();
-//		boundSearch();
-	}
+//	public void initWith(List<double[]> vertices, List<int[]> elements){
+//		this.vertices = vertices;
+//		this.elements = elements;
+//		MeshProcessor mp = new MeshProcessor(vertices, elements);
+//		mp.handle();
+//		nodesE = mp.getSurrE();
+//		nodesN = mp.getSurrN();
+////		boundSearch();
+//	}
 	
-	private void boundSearch() {
-		boundNodesId = new ArrayList<>();
-		for(int i = 0, len = nodesE.size(); i < len; i++) {
-			List<Integer> ean = nodesE.get(i);
-			int eid1 = ean.get(0);
-			int eidL = ean.get(ean.size() - 1);
-			int[] e1 = elements.get(eid1);
-			int[] eL = elements.get(eidL);
-			int s = ArrUtil.findNext(e1, i);
-			int e = ArrUtil.findPre(eL, i);
-			if(s != e) {
-				boundNodesId.add(i);
-			}
-		}
-//		FileIO.writeDoubleArrList(LsUtil.select(vertices, boundNodesId), "E:/fvm/7/boundNode.txt","\t");
-//		System.out.println("++++++++++++++++++bound nodes size = " + boundNodesId.size());
-	}
+//	private void boundSearch() {
+//		boundNodesId = new ArrayList<>();
+//		for(int i = 0, len = nodesE.size(); i < len; i++) {
+//			List<Integer> ean = nodesE.get(i);
+//			int eid1 = ean.get(0);
+//			int eidL = ean.get(ean.size() - 1);
+//			int[] e1 = elements.get(eid1);
+//			int[] eL = elements.get(eidL);
+//			int s = ArrUtil.findNext(e1, i);
+//			int e = ArrUtil.findPre(eL, i);
+//			if(s != e) {
+//				boundNodesId.add(i);
+//			}
+//		}
+////		FileIO.writeDoubleArrList(LsUtil.select(vertices, boundNodesId), "E:/fvm/7/boundNode.txt","\t");
+////		System.out.println("++++++++++++++++++bound nodes size = " + boundNodesId.size());
+//	}
 	
 	public String getWorkspace(){
 		String[] str = uri.split("/");
@@ -92,9 +90,9 @@ public class Mesh {
 		return nodesN;
 	}
 
-	public List<Integer> getBoundNodesId() {
-		return boundNodesId;
-	} 
+//	public List<Integer> getBoundNodesId() {
+//		return boundNodesId;
+//	} 
 	
 	public int getNON(){
 		return vertices.size();

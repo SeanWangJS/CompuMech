@@ -2,7 +2,7 @@ package com.haswalk.solver.fvm2d.config;
 
 import com.haswalk.solver.fvm2d.config.control.TimeConfig;
 
-public class Control {
+public class Control{
 
 	private TimeConfig time;
 	

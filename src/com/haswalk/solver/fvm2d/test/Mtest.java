@@ -3,6 +3,7 @@ package com.haswalk.solver.fvm2d.test;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -81,5 +82,21 @@ public class Mtest {
 		System.out.println(String.valueOf(value));
 		double k = new Expression("t + 1").with("t", new BigDecimal(value)).eval().doubleValue();
 		System.out.println(k);
+	}
+	
+	@Test
+	public void test4() {
+		HashMap<String, B> map = new HashMap<>();
+		map.put("b1", new B("b1"));
+		System.out.println(map.toString());
+	}
+	class B {
+		private String b;
+		public B(String b) {
+			this.b = b;
+		}
+		public String toString() {
+			return b + "csdk\n";
+		}
 	}
 }

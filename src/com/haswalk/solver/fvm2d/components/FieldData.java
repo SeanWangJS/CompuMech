@@ -5,12 +5,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.haswalk.solver.fvm2d.annotation.Component;
 import com.sean.wang.utils.ArrUtil;
 import com.sean.wang.utils.Geom;
 import com.sean.wang.utils.LsUtil;
 
-@Component
 public class FieldData {
 	
 	public final static String NODE_COOR_LST_X = "node_coor_lst_x";

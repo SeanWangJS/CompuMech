@@ -2,10 +2,8 @@ package com.haswalk.solver.fvm2d.processors.support.force;
 
 import java.util.List;
 
-import com.haswalk.solver.fvm2d.annotation.Component;
 import com.haswalk.solver.fvm2d.components.TimeControl;
 
-@Component
 public class HourglassDamping {
 
 	private List<int[]> elements;

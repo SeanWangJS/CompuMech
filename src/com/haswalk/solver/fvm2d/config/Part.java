@@ -3,8 +3,9 @@ package com.haswalk.solver.fvm2d.config;
 import com.haswalk.solver.fvm2d.config.part.BoundaryCondtionApplyArea;
 import com.haswalk.solver.fvm2d.config.part.Gauge;
 import com.haswalk.solver.fvm2d.config.part.Mesh;
+import com.haswalk.solver.fvm2d.util.Initiation;
 
-public class Part {
+public class Part implements Initiation{
 
 	private int materialID;
 	private int outputID;
@@ -12,7 +13,7 @@ public class Part {
 	private BoundaryCondtionApplyArea boundaryCondition;
 	private Gauge gauge;
 	
-	void init(){
+	public void init(){
 		mesh.init();
 		boundaryCondition.init(mesh.getVertices());
 		gauge.init(mesh.getVertices());

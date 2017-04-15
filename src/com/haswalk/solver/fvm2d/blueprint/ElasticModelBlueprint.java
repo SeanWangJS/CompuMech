@@ -8,10 +8,8 @@ import com.haswalk.solver.fvm2d.components.creation.ModelDataCreationMethod;
 import com.haswalk.solver.fvm2d.components.creation.TimeControlCreationMethod;
 import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.creation.GaugerCreationMethod;
-import com.haswalk.solver.fvm2d.processors.creation.PMLUpdateCreationMethod;
 import com.haswalk.solver.fvm2d.processors.creation.SaverCreationMethod;
 import com.haswalk.solver.fvm2d.processors.extend.NodeStressUpdate;
-import com.haswalk.solver.fvm2d.processors.extend.PolyNomiPressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.AccUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultDispUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultForceUpdate;
@@ -35,7 +33,6 @@ public class ElasticModelBlueprint extends Blueprint{
 		registProcessor(Processor.FORCE_UPDATE, DefaultForceUpdate.class);
 		registProcessor("SymmtricBCApplyUpdate", SymmetricBCApplyUpdate.class); 
 		registProcessor(Processor.ACC_UPDATE, AccUpdate.class);
-//		registProcessorCreationMethod("PMLUpdate", new PMLUpdateCreationMethod());
 		registProcessor(Processor.VEL_UPDATE, DefaultVelUpdate.class);
 		registProcessor(Processor.DISP_UPDATE, DefaultDispUpdate.class);
 		registProcessor(Processor.GROUP_UPDATE, GroupUpdate.class);

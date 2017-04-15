@@ -6,8 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import com.haswalk.solver.fvm2d.config.material.ElasticModel;
 import com.haswalk.solver.fvm2d.config.material.MohrCoulomb;
 import com.haswalk.solver.fvm2d.config.material.StrengthModel;
+import com.haswalk.solver.fvm2d.util.Initiation;
 
-public class Material {
+public class Material implements Initiation{
 
 	public final static HashMap<String, Class<?>> strengthModelMap = new HashMap<>();
 	public final static HashMap<String, Double> strengthModelExp = new HashMap<>();

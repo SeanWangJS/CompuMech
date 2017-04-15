@@ -14,9 +14,8 @@ public class SolverTest {
 	private String json = null;
 	@Before
 	public void before() throws IOException{
-//		Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json");
-//		json = new String(Files.readAllBytes(Paths.get("C:/Users/wangx/OneDrive/workspace/neon/solver/src/com/haswalk/solver/fvm2d/test/resource/config.json")));
-		json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json")));
+		json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), 
+				"src/com/haswalk/solver/fvm2d/test/resource/config.json")));
 	}
 	@Test
 	public void testSolve(){
