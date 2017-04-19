@@ -25,6 +25,7 @@ public class InternalForceUpdate {
 
 	public void calc() {
 		int NON = vertices.size();
+		
 		for (int i = 0; i < NON; i++) {
 			double fx = 0;
 			double fy = 0;

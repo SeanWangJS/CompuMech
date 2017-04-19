@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.sean.wang.utils.ArrUtil;
+import com.sean.wang.utils.FileIO;
 import com.sean.wang.utils.Geom;
 import com.sean.wang.utils.LsUtil;
 
@@ -50,6 +51,8 @@ public class FieldData {
 	private int NOE;
 	private int NON;
 	
+	private int partId;
+	
 	static{
 		data1dName.addAll(Arrays.asList(NODE_COOR_LST_X, NODE_COOR_LST_Y, FORCE_X, FORCE_Y, ACC_X, ACC_Y, VEL_X, VEL_Y, DISP_X, DISP_Y,
 				NODE_STRESS_X, NODE_STRESS_Y, NODE_STRESS_XY, NODE_MASS,
@@ -58,9 +61,10 @@ public class FieldData {
 				ELEM_STRESS_DEV_Y, ELEM_STRESS_DEV_XY, ELEM_PRESSURE, ELEM_CHAR_LEN));
 	}
 	
-	public FieldData(int NON, int NOE){
+	public FieldData(int NON, int NOE, int partId){
 		this.NOE = NOE;
 		this.NON = NON;
+		this.partId = partId;
 		init();
 	}
 	
@@ -104,12 +108,17 @@ public class FieldData {
 			eArea[i] = area;
 			eMass[i] = area * initDensity;
 		}
+		
 		for(int i = 0; i < NON; i++) {
 			List<Integer> ean = nodesE.get(i);
 			double[] masses = ArrUtil.select(eMass, ean);
-			nMass[i] = ArrUtil.sum(masses) / 4.0;
+//			nMass[i] = ArrUtil.sum(masses) / 4.0;
+			for(int j = 0; j < masses.length; j++) {
+				nMass[i] += masses[j] / (double)elements.get(ean.get(j)).length;
+			}
 		}
-		
+//		FileIO.writeDoubleArr_stream(nMass, "E:/fvm/15/nMass" + partId + ".txt");
+//		FileIO.writeIntListList(nodesE, "E:/fvm/15/nodesE"+partId+".txt", "\t");
 	}
 	
 	public double[] get(String name){

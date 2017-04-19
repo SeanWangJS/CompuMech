@@ -11,7 +11,8 @@ public class FieldDataCreationMethod implements ComponentCreationMethod{
 	@Override
 	public Object invoke(int partId, Config config) {
 		FieldData fieldData = new FieldData(config.getParts().get(partId).getMesh().getNON(),
-				config.getParts().get(partId).getMesh().getNOE());
+				config.getParts().get(partId).getMesh().getNOE(),
+				partId);
 		fieldData.setInitDensity(config
 									.getMaterials()
 									.get(config.getParts()

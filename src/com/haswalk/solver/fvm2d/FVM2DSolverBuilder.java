@@ -17,11 +17,10 @@ import com.haswalk.solver.fvm2d.config.initiation.PMLBoundaryInitiation;
 
 public class FVM2DSolverBuilder implements SolverBuilder{
 
-	private Config config;
+	private Config config = new Config();;
 	
 	@Override
 	public SolverBuilder parseConfig(String configJson) {
-		config = new Config();
 		
 		config.registConfigItem("boundaries", new HashMap<>())
 		  .registConfigItem("materials", new HashMap<>())

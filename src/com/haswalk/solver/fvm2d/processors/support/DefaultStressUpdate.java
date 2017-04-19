@@ -16,6 +16,7 @@ public class DefaultStressUpdate implements StressUpdate{
 	@Override
 	public void calc() {
 		int NOE = sx.length;
+
 		for(int i = 0; i < NOE; i++){
 			sx[i] = - pressure[i] + sdvx[i];
 			sy[i] = - pressure[i] + sdvy[i];

@@ -9,7 +9,6 @@ import com.haswalk.solver.fvm2d.config.Config;
 import com.haswalk.solver.fvm2d.config.Part;
 import com.haswalk.solver.fvm2d.config.boundary.PMLBoundary;
 import com.haswalk.solver.fvm2d.util.Geom;
-import com.sean.wang.utils.LsUtil;
 import com.sean.wang.utils.mesh.MeshProcessor;
 
 public class PMLBoundaryInitiation implements InitiationMethod{
@@ -26,7 +25,6 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 				Part part = config.getPart(partId);
 				List<double[]> vertices = part.getMesh().getVertices();
 				List<int[]> elements = part.getMesh().getElements();
-				int NON = vertices.size();
 				
 				List<Integer> applyNodesId = part.getBoundaryCondition().getApplyNodesId(bid);
 				
@@ -55,14 +53,15 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 				
 				vertices.addAll(verts);
 				elements.addAll(elems);
-//				System.out.println("vertices num: " + vertices.size() + ", " + part.getMesh().getVertices().size());
-//				System.out.println("elements num: " + elements.size() + ", " + part.getMesh().getElements().size());
+				
+//				FileIO.writeDoubleArrList(vertices, "E:/fvm/15/verts.txt", "\t");
+//				FileIO.writeIntArrList(elements, "E:/fvm/15/elems.txt", "\t");
+				
 				MeshProcessor mp = new MeshProcessor(vertices, elements);
 				mp.handle();
-				part.getMesh().getNodesN().addAll(LsUtil.take(mp.getSurrN(), NON, vertices.size()));
-				part.getMesh().getNodesE().addAll(LsUtil.take(mp.getSurrE(), NON, vertices.size()));
-//				System.out.println("nodesE size:" + part.getMesh().getNodesE().size());
-//				System.out.println("nodesN size:" + part.getMesh().getNodesN().size());
+				part.getMesh().setNodesE(mp.getSurrE());
+				part.getMesh().setNodesN(mp.getSurrN());
+				
 				pml.setDelta(delta);
 				pml.setDist(dist);
 				pml.setPMLNodesIds(PMLNodesIds);
@@ -105,7 +104,7 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 		
 		for(int i = 0; i < n - 1; i++) {
 			for(int j = 0; j < m - 1;j++) {
-				elems.add(new int[]{j + i * (m - 1) + total, j + 1 + i * (m - 1) + total, j + 1 + i * (m - 1) + m + total, j + i * (m - 1) + m + total});
+				elems.add(new int[]{j + i * m + total, j + 1 + i * m + total, j + 1 + i * m + m + total, j + i * m + m + total});
 			}
 		}
 	}

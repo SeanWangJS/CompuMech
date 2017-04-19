@@ -28,14 +28,32 @@ public class SinglePartTimestepUpdate {
 		double minLen = Double.MAX_VALUE;
 		
 		for(int i = 0; i < NOE; i++) {
-			double d1 = Geom.distSq(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[2]));
-			double d2 = Geom.distSq(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[3]));
-			charLen[i] = eArea[i] / Math.sqrt(((d1 > d2) ? d1 : d2));
-			if(minLen > charLen[i]) {
+			if (elements.get(i).length == 4) {
+				double d1 = Geom.distSq(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[2]));
+				double d2 = Geom.distSq(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[3]));
+				charLen[i] = eArea[i] / Math.sqrt((max(d1, d2)));
+			}else if(elements.get(i).length == 3) {
+				double d1 = Geom.distSq(vertices.get(elements.get(i)[0]), vertices.get(elements.get(i)[1]));
+				double d2 = Geom.distSq(vertices.get(elements.get(i)[1]), vertices.get(elements.get(i)[2]));
+				double d3 = Geom.distSq(vertices.get(elements.get(i)[2]), vertices.get(elements.get(i)[1]));
+				charLen[i] = eArea[i] / Math.sqrt((max(d1, d2, d3)));
+			}
+			if (minLen > charLen[i]) {
 				minLen = charLen[i];
 			}
 		}
 		return minLen / c;
+	}
+	
+	private final double max(double d1, double d2) {
+		return (d1 > d2) ? d1 : d2;
+	}
+	private final double max(double d1, double d2, double d3) {
+		if(d1 >= d2 && d1 >= d3) {
+			return d1;
+		}else{
+			return max(d2, d3, d1);
+		} 
 	}
 	
 	public String toString(){

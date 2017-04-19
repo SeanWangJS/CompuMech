@@ -26,6 +26,9 @@ public class PMLUpdateCreationMethod implements ProcessorCreationMethod{
 				pmlBc = (PMLBoundaryCondition) bc;
 			}
 		}
+		if(pmlBc == null) {
+			return new PMLUpdate(0, null, null, null, null, null, null, 0);
+		}
 		return new PMLUpdate(pmlBc.getDelta(), 
 				((FieldData)componentsMap.get(partId).get(Components.FIELD_DATA)).get(FieldData.VEL_X), 
 				((FieldData)componentsMap.get(partId).get(Components.FIELD_DATA)).get(FieldData.VEL_Y), 

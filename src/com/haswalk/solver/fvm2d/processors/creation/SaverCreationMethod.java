@@ -28,6 +28,8 @@ public class SaverCreationMethod implements ProcessorCreationMethod{
 													 			  .get(Components.FIELD_DATA))
 									    .get(item)));
 		saver.set(config.getParts().get(partId).getMesh().getWorkspace(), 
+				  config.getOutputs().get(config.getParts().get(partId).getOutputID()).getSaveItems().getStart(),
+				  config.getOutputs().get(config.getParts().get(partId).getOutputID()).getSaveItems().getEnd(),
 				  config.getOutputs().get(config.getParts().get(partId).getOutputID()).getSaveItems().getInc(), 
 				  partId,
 				  (TimeControl) componentsMap.get(partId).get(Components.TIME_CONTROL), 

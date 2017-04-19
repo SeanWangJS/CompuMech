@@ -16,9 +16,6 @@ public class Mesh {
 	private List<List<Integer>> nodesN;
 //	private List<Integer> boundNodesId; 
 	
-	private int realNON;
-	private int realNOE;
-	
 	public String toString() {
 		
 		return "mesh path: \n"+ uri +"\nend";
@@ -36,8 +33,8 @@ public class Mesh {
 		mp.handle();
 		nodesE = mp.getSurrE();
 		nodesN = mp.getSurrN();
-		this.realNOE = vertices.size();
-		this.realNOE = elements.size();
+//		this.realNOE = vertices.size();
+//		this.realNOE = elements.size();
 //		boundSearch();
 	}
 //	private void boundSearch() {
@@ -78,6 +75,13 @@ public class Mesh {
 	public List<List<Integer>> getNodesN() {
 		return nodesN;
 	}
+	
+	public void setNodesN(List<List<Integer>> nodesN) {
+		this.nodesN = nodesN;
+	}
+	public void setNodesE(List<List<Integer>> nodesE) {
+		this.nodesE = nodesE;
+	}
 
 //	public List<Integer> getBoundNodesId() {
 //		return boundNodesId;
@@ -88,12 +92,5 @@ public class Mesh {
 	}
 	public int getNOE(){
 		return elements.size(); 
-	}
-	
-	public int getRealNON() {
-		return realNON;
-	}
-	public int getRealNOE() {
-		return realNOE;
 	}
 }

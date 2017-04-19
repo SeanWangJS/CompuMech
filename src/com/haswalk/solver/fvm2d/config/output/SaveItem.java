@@ -4,8 +4,18 @@ import java.util.List;
 
 public class SaveItem {
 	
+	private int start;
+	private int end;
 	private int inc;
 	private List<String> items;
+	
+	public int getStart() {
+		return start;
+	}
+	
+	public int getEnd() {
+		return end;
+	}
 	
 	public int getInc() {
 		return inc;

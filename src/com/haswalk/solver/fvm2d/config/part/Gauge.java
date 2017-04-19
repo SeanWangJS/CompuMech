@@ -9,13 +9,14 @@ import com.sean.wang.utils.Geom;
 public class Gauge {
 	private boolean fixed = false;
 	private double[][] points;
+	private double tolerance = 0.001;
 	
 	private List<Integer> gaugeNodesID;
 	
 	public void init(List<double[]> vertices) {
 		gaugeNodesID = new ArrayList<>();
 		for(double[] p: points) {
-			gaugeNodesID.add(Geom.nearest(vertices, p, 0.001));
+			gaugeNodesID.add(Geom.nearest(vertices, p, tolerance));
 		}
 	}
 	
@@ -37,7 +38,8 @@ public class Gauge {
 		for(double[] point: points) {
 			builder.append(Arrays.toString(point) + "\n");
 		}
-		builder.append("end");
+		builder.append("gauge nodes id: " + gaugeNodesID+"\n");
+		builder.append("end\n");
 		return builder.toString();
 	}
 }

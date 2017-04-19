@@ -20,6 +20,7 @@ public class StressDevUpdate implements Processor{
 	@Override
 	public void calc() {
 		int NOE = srx.length;
+	
 		for(int i = 0; i < NOE; i++){
 			double sin_theta = srxy[i] * time.getTimeStep();
 			double sin_2theta = 2 * sin_theta / (1 + sin_theta * sin_theta);
