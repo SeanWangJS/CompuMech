@@ -18,7 +18,7 @@ import com.haswalk.solver.fvm2d.config.Part;
 import com.haswalk.solver.fvm2d.config.boundary.LoadBoundary;
 import com.haswalk.solver.fvm2d.config.deserializer.BoundaryDeserializer;
 import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
-import com.haswalk.solver.fvm2d.config.part.BoundaryCondtionApplyArea;
+import com.haswalk.solver.fvm2d.config.part.BoundaryConditionApplyPosition;
 import com.haswalk.solver.fvm2d.config.part.Gauge;
 import com.haswalk.solver.fvm2d.config.part.Mesh;
 import com.sean.wang.utils.DouArr;
@@ -201,7 +201,7 @@ public class ConfigParserTest {
 		Mesh mesh = part.getMesh();
 		mesh.init();
 		
-		BoundaryCondtionApplyArea boundary = part.getBoundaryCondition();
+		BoundaryConditionApplyPosition boundary = part.getBoundaryCondition();
 		boundary.init(mesh.getVertices());
 		List<Integer> ids1 = boundary.getApplyNodesId(1);
 		System.out.println(ids1.toString());

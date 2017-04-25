@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm2d.config;
 
-import com.haswalk.solver.fvm2d.config.part.BoundaryCondtionApplyArea;
+import com.haswalk.solver.fvm2d.config.part.BoundaryConditionApplyPosition;
 import com.haswalk.solver.fvm2d.config.part.Gauge;
 import com.haswalk.solver.fvm2d.config.part.Mesh;
 import com.haswalk.solver.fvm2d.util.Initiation;
@@ -10,7 +10,7 @@ public class Part implements Initiation{
 	private int materialID;
 	private int outputID;
 	private Mesh mesh;
-	private BoundaryCondtionApplyArea boundaryCondition;
+	private BoundaryConditionApplyPosition boundaryCondition;
 	private Gauge gauge;
 	
 	public void init(){
@@ -31,7 +31,7 @@ public class Part implements Initiation{
 		return mesh;
 	}
 
-	public BoundaryCondtionApplyArea getBoundaryCondition() {
+	public BoundaryConditionApplyPosition getBoundaryCondition() {
 		return boundaryCondition;
 	}
 

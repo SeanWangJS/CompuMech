@@ -15,7 +15,7 @@ public class SolverBuilderTest {
 	
 	@Before
 	public void before() throws IOException{
-		json = new String(Files.readAllBytes(Paths.get("E:/fvm/21/config.json")));
+		json = new String(Files.readAllBytes(Paths.get("E:/fvm/22/config.json")));
 	}
 	@Test
 	public void test1(){

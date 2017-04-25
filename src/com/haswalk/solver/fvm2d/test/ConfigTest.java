@@ -28,7 +28,8 @@ public class ConfigTest {
 	
 	@Test
 	public void test() throws IOException {
-		String json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json")));
+//		String json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/com/haswalk/solver/fvm2d/test/resource/config.json")));
+		String json = new String(Files.readAllBytes(Paths.get("E:/fvm/22/config.json")));
 		
 		Config config = new Config();
 		config.registConfigItem("boundaries", new HashMap<>())

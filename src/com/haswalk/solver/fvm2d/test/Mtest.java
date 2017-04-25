@@ -3,7 +3,9 @@ package com.haswalk.solver.fvm2d.test;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -98,5 +100,16 @@ public class Mtest {
 		public String toString() {
 			return b + "csdk\n";
 		}
+	}
+	
+	@Test
+	public void test5() {
+		List<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(0);
+		list.remove(0);
+		System.out.println(list);
 	}
 }
