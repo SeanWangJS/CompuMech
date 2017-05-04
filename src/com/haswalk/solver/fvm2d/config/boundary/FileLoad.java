@@ -12,7 +12,7 @@ public class FileLoad extends Load{
 	
 	@Override
 	public void init() {
-		List<double[]> load = FileIO.readDoubleArrListV2(uri, "\\s+");
+		List<double[]> load = FileIO.readDoubleArrList(uri, "\\s+");
 		t = new double[load.size()];
 		value = new double[load.size()];
 		
