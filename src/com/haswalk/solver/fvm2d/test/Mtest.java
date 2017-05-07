@@ -6,10 +6,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
 import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.sean.wang.utils.ArrUtil;
+import com.sean.wang.utils.FileIO;
 import com.udojava.evalex.Expression;
 
 public class Mtest {
@@ -111,5 +114,30 @@ public class Mtest {
 		list.add(0);
 		list.remove(0);
 		System.out.println(list);
+	}
+	
+	@Test
+	public void test6() {
+		List<double[]> pre = FileIO.readDoubleArrList("E:/fvm/24/pressure.csv", ",");
+		double[][] pressure1 = new double[pre.size()][];
+		double[][] pressure2 = new double[pre.size()][];
+		for(int i = 0, len = pre.size(); i < len; i++) {
+			double[] p =pre.get(i);
+			pressure1[i] = new double[]{p[0] / 1000.0, p[1] * 10e6};
+			pressure2[i] = new double[]{p[0], p[1] * 10e3};
+		}
+		
+		FileIO.writeDouble2DArr(pressure1, "E:/fvm/24/pressure.txt", "\t");
+		FileIO.write(ArrUtil.toStandardFormatString(pressure2, 5), "E:/fvm/24/pressure.uhs");
+		
+	}
+	
+	@Test
+	public void test7() {
+		List<double[]> vertices = FileIO.readDoubleArrList("E:/fvm/24/vertices.txt", "\\s+");
+		List<double[]> verts = vertices.stream().map(v -> {
+			return new double[]{v[0] * 10, v[1] * 10};
+		}).collect(Collectors.toList());
+		FileIO.writeDoubleArrList(verts, "E:/fvm/25/vertices.txt", "\t");
 	}
 }

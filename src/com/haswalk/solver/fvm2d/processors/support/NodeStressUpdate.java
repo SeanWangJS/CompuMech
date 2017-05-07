@@ -44,7 +44,7 @@ public class NodeStressUpdate implements Processor{
 		nsx = fd.get("node_stress_x");
 		nsy = fd.get("node_stress_y");
 		nsxy = fd.get("node_stress_xy");
-		nodesE = (List<List<Integer>>) md.get(ModelData.NODES_AROUND_ELEM);
+		nodesE = (List<List<Integer>>) md.get(ModelData.ELEMS_AROUND_NODE);
 	}
 	
 }

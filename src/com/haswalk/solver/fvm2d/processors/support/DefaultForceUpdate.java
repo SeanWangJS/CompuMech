@@ -38,7 +38,7 @@ public class DefaultForceUpdate implements ForceUpdate {
 	@Injection
 	public void set(FieldData fd, ModelData md, TimeControl tc) {
 		ifu = new InternalForceUpdate((List<double[]>) md.get(VERTICES), (List<int[]>) md.get(ELEMENTS),
-				(List<List<Integer>>) md.get(NODES_AROUND_ELEM), 
+				(List<List<Integer>>) md.get(ELEMS_AROUND_NODE), 
 				fd.get(FORCE_X), fd.get(FORCE_Y), fd.get(ELEM_STRESS_X), fd.get(ELEM_STRESS_Y),
 				fd.get(ELEM_STRESS_XY));
 		hd = new HourglassDamping((List<int[]>) md.get(ELEMENTS), fd.get(FORCE_X), fd.get(FORCE_Y), fd.get(VEL_X),

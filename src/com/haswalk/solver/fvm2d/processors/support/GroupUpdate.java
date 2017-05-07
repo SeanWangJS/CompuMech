@@ -32,7 +32,7 @@ public class GroupUpdate implements Processor{
 		au = new AreaUpdate((List<int[]>) md.get(ELEMENTS), (List<double[]>) md.get(VERTICES), 
 				fd.get(ELEM_AREA), fd.get(ELEM_AREA_LST));
 		du = new DensityUpdate(fd.get(ELEM_DENSITY), fd.get(ELEM_MASS), fd.get(ELEM_AREA));
-		nmu = new NodeMassUpdate((List<List<Integer>>)md.get(NODES_AROUND_ELEM), 
+		nmu = new NodeMassUpdate((List<List<Integer>>)md.get(ELEMS_AROUND_NODE), 
 				(List<int[]>)md.get(ELEMENTS), (List<double[]>)md.get(VERTICES), 
 				fd.get(NODE_MASS), fd.get(ELEM_DENSITY));
 	}

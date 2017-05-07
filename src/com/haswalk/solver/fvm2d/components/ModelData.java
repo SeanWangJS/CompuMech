@@ -7,7 +7,7 @@ public class ModelData {
 
 	public final static String VERTICES = "vertices";
 	public final static String ELEMENTS = "elements";
-	public final static String NODES_AROUND_ELEM = "nodesAroundElem";
+	public final static String ELEMS_AROUND_NODE = "elemsAroundNode";
 	public final static String NODES_AROUDN_NODE = "nodesAroundNode";
 	public final static String GAUGE_NODES_ID = "gaugeNodesId";
 	public final static String BOUND_NODES_ID = "boundNodesId";
@@ -29,7 +29,7 @@ public class ModelData {
 		builder.append("ModelData-------------------------------\n");
 		builder.append("vertices num: " + modelData.get(VERTICES).size() + "\n")
 			   .append("elements num: " + modelData.get(ELEMENTS).size() + "\n")
-			   .append("nodes around elem num: " + modelData.get(NODES_AROUND_ELEM).size() + "\n")
+			   .append("nodes around elem num: " + modelData.get(ELEMS_AROUND_NODE).size() + "\n")
 			   .append("nodes around node num: " + modelData.get(NODES_AROUDN_NODE).size() + "\n")
 			   .append("boundary conditions: " + "\n");
 		

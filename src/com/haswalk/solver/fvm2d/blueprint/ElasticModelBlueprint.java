@@ -2,6 +2,7 @@ package com.haswalk.solver.fvm2d.blueprint;
 
 import com.haswalk.solver.fvm2d.Blueprint;
 import com.haswalk.solver.fvm2d.components.Components;
+import com.haswalk.solver.fvm2d.components.FieldData;
 import com.haswalk.solver.fvm2d.components.creation.FieldDataCreationMethod;
 import com.haswalk.solver.fvm2d.components.creation.MaterialPropertyCreationMethod;
 import com.haswalk.solver.fvm2d.components.creation.ModelDataCreationMethod;
@@ -10,6 +11,7 @@ import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.creation.GaugerCreationMethod;
 import com.haswalk.solver.fvm2d.processors.creation.PMLUpdateCreationMethod;
 import com.haswalk.solver.fvm2d.processors.creation.SaverCreationMethod;
+import com.haswalk.solver.fvm2d.processors.extend.NodePressureUpdate;
 import com.haswalk.solver.fvm2d.processors.support.AccUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultDispUpdate;
 import com.haswalk.solver.fvm2d.processors.support.DefaultForceUpdate;
@@ -26,6 +28,8 @@ import com.haswalk.solver.fvm2d.processors.support.SymmetricBCApplyUpdate;
 public class ElasticModelBlueprint extends Blueprint{
 
 	public ElasticModelBlueprint(){
+		
+		FieldData.regist("node_pressure");
 		
 		registComponentCreationMethod(Components.MODEL_DATA, new ModelDataCreationMethod());
 		registComponentCreationMethod(Components.FIELD_DATA, new FieldDataCreationMethod());
@@ -47,6 +51,7 @@ public class ElasticModelBlueprint extends Blueprint{
 		registProcessorCreationMethod("Gauger", new GaugerCreationMethod());
 		registProcessorCreationMethod("Saver", new SaverCreationMethod());
 		registProcessor("NodeStressUpdate", NodeStressUpdate.class);
+		registProcessor("NodePressureUpdate", NodePressureUpdate.class);
 	}
 	
 }

@@ -21,7 +21,12 @@ public class GaugerCreationMethod implements ProcessorCreationMethod{
 						   .getGaugeItem()
 						   .getItems();
 		for(String item:items) {
-			data.put(item, ((FieldData)componentsMap.get(partId).get(Components.FIELD_DATA)).get(item));
+			double[] value = ((FieldData)componentsMap.get(partId).get(Components.FIELD_DATA)).get(item);
+			if(value == null) {
+				System.err.println("Error: can not find param named + " + item + ", please check out your config.");
+				continue;
+			}
+			data.put(item, value);
 		}	   
 		
 		gauger.set(config.getParts().get(partId).getMesh().getWorkspace(), 

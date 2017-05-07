@@ -19,7 +19,7 @@ public class ModelDataCreationMethod implements ComponentCreationMethod{
 		regist(ModelData.VERTICES, new VerticesCreation());
 		regist(ModelData.ELEMENTS, new ElementsCreation());
 		regist(ModelData.NODES_AROUDN_NODE, new NONCreation());
-		regist(ModelData.NODES_AROUND_ELEM, new NOECreation());
+		regist(ModelData.ELEMS_AROUND_NODE, new NOECreation());
 		regist(ModelData.BOUNDARY_CONDITION, new BoundaryCreation());
 	}
 	
