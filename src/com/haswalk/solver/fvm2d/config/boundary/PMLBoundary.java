@@ -5,6 +5,7 @@ public class PMLBoundary extends TransmitBoundary{
 	private int layerNum;
 	private double[] dist;
 	private int[] PMLNodesIds;
+	private int[] PMLBoundNodesID;
 	private double delta;
 	
 	public void setDist(double[] dist) {
@@ -34,6 +35,12 @@ public class PMLBoundary extends TransmitBoundary{
 				.append(super.toString())
 				.append("layer number: " + layerNum + "\n")
 				.toString();
+	}
+	public int[] getPMLBoundNodesID() {
+		return PMLBoundNodesID;
+	}
+	public void setPMLBoundNodesID(int[] pMLBoundNodesID) {
+		PMLBoundNodesID = pMLBoundNodesID;
 	}
 	
 }

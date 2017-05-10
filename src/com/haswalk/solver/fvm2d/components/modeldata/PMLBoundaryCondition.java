@@ -8,13 +8,15 @@ public class PMLBoundaryCondition extends BoundaryCondition{
 	private List<Integer> applyNodesId;
 	private double[] dist;
 	private int[] PMLNodesId;
+	private int[] PMLBoundNodesID;
 	private double delta;
 	
-	public PMLBoundaryCondition(String type, List<Integer> applyNodesId, double[] dist, int[] PMLNodesId, double delta) {
+	public PMLBoundaryCondition(String type, List<Integer> applyNodesId, double[] dist, int[] PMLNodesId, int[] PMLBoundNodesID, double delta) {
 		super(type);
 		this.applyNodesId = applyNodesId;
 		this.dist = dist;
 		this.PMLNodesId = PMLNodesId;
+		this.PMLBoundNodesID = PMLBoundNodesID;
 		this.delta = delta;
 	}
 	public List<Integer> getApplyNodesId() {
@@ -26,6 +28,9 @@ public class PMLBoundaryCondition extends BoundaryCondition{
 	}
 	public int[] getPMLNodesId() {
 		return PMLNodesId;
+	}
+	public int[] getPMLBoundNodesID() {
+		return PMLBoundNodesID;
 	}
 	public double getDelta() {
 		return delta;

@@ -14,6 +14,7 @@ public class PMLBoundaryConditionCreation implements BoundaryConditionCreationMe
 												config.getParts().get(partId).getBoundaryCondition().getApplyNodesId(bcId),
 												b.getDist(),
 												b.getPMLNodesIds(),
+												b.getPMLBoundNodesID(),
 												b.getDelta());
 	}
 
