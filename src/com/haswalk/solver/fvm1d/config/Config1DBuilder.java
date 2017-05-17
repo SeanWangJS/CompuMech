@@ -5,11 +5,11 @@ public class Config1DBuilder {
 	private Config1D config = new Config1D();
 	
 	public Material material(int id){
-		return new Material(id, this);
+		return Material.create(id, this);
 	}
 	
-	public Load load(int id){
-		return new Load(id, this);
+	public Boundary boundary(int id, String type){
+		return Boundary.create(id, type, this);
 	}
 	
 	public Part part(int id){
@@ -29,7 +29,7 @@ public class Config1DBuilder {
 		return this;
 	}
 	
-	Config1DBuilder putLoad(Load load) {
+	Config1DBuilder putLoad(Boundary load) {
 		config.putLoad(load);
 		return this;
 	}

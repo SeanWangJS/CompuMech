@@ -1,6 +1,9 @@
 package com.haswalk.solver.fvm1d.config;
 
-public class Material {
+import com.haswalk.jsonutil.Serialize;
+import com.haswalk.solver.fvm1d.util.SetMethod;
+
+public class Material implements SetMethod{
 
 	public final static String ELASTIC_MODULE = "elasticModule";
 	public final static String DENSITY = "density";
@@ -8,26 +11,27 @@ public class Material {
 	private int id;
 	private Config1DBuilder builder;
 	
+	@Serialize
 	private double elasticModule;
+	@Serialize
 	private double density;
 
-	public Material(int id, Config1DBuilder builder) {
-		this.id = id;
-		this.builder = builder;
+	public static Material create(int id, Config1DBuilder builder) {
+		return new Material().setId(id).setBuilder(builder);
 	}
 	
-	public Material set(String property, double value){
-		switch(property){
-		case ELASTIC_MODULE:
-			elasticModule = value;
-			break;
-		case DENSITY:
-			density = value;
-			break;
-		default:
-			System.err.println("Error: can not match property " + property + " in material");
-			break;
-		}
+	public Material set(String property, Object value){
+		setProperty(this, property, value);
+		return this;
+	}
+	
+	public Material setId(int id) {
+		this.id = id;
+		return this;
+	}
+	
+	public Material setBuilder(Config1DBuilder builder) {
+		this.builder = builder;
 		return this;
 	}
 	
@@ -44,5 +48,14 @@ public class Material {
 		return new StringBuilder()
 				.append("{'elasticModule': " + elasticModule + ", 'density': " +density+ "}")
 				.toString();
+	}
+	
+	public Material setDensity(double density) {
+		this.density = density;
+		return this;
+	}
+	public Material setElasticModule(double elasticModule) {
+		this.elasticModule = elasticModule;
+		return this;
 	}
 }

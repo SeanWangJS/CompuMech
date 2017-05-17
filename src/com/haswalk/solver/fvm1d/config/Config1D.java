@@ -2,23 +2,39 @@ package com.haswalk.solver.fvm1d.config;
 
 import java.util.HashMap;
 
+import com.haswalk.jsonutil.Serialize;
+
 public class Config1D {
 
+	@Serialize
 	private HashMap<Integer, Material> materials;
-	private HashMap<Integer, Load> loads;
+	@Serialize
+	private HashMap<Integer, Boundary> boundaries;
+	@Serialize
 	private HashMap<Integer, Part> parts;
+	@Serialize
 	private Control control;
+	@Serialize
 	private HashMap<Integer, Output> outputs;
 	
 	public void init(){
 		
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("materials: \r\n" + materials.toString() + "\r\nboundaries: \r\n"  
+		+ boundaries.toString() + "\r\nparts: \r\n" + parts.toString() + "\r\ncontrol: \r\n" + control.toString() 
+		+ "\r\noutputs: \r\n" + outputs.toString() + "\r\n"); 
+		return super.toString();
+	}
+	
 	public void putMaterial(Material material) {
 		materials.put(material.getId(), material);
 	}
-	public void putLoad(Load load) {
-		loads.put(load.getId(), load);
+	public void putLoad(Boundary load) {
+		boundaries.put(load.getId(), load);
 	}
 	public void putPart(Part part) {
 		parts.put(part.getId(), part);
@@ -33,11 +49,11 @@ public class Config1D {
 	public void setMaterials(HashMap<Integer, Material> materials) {
 		this.materials = materials;
 	}
-	public HashMap<Integer, Load> getLoads() {
-		return loads;
+	public HashMap<Integer, Boundary> getBoundaies() {
+		return boundaries;
 	}
-	public void setLoads(HashMap<Integer, Load> loads) {
-		this.loads = loads;
+	public void setBoundaries(HashMap<Integer, Boundary> boundaries) {
+		this.boundaries = boundaries;
 	}
 	public HashMap<Integer, Part> getParts() {
 		return parts;

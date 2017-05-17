@@ -1,10 +1,13 @@
 package com.haswalk.solver.fvm1d.config;
 
-public class Part {
+import com.haswalk.solver.fvm1d.util.SetMethod;
+
+public class Part implements SetMethod{
 
 	public final static String MESH_URI = "meshUri";
 	public final static String MATERIAL_ID = "materialID";
 	public final static String OUTPUT_ID = "outputID";
+	public final static String GAUGE_POINTS = "gaugePoints";
 	
 	private int id;
 	private Config1DBuilder builder;
@@ -20,28 +23,8 @@ public class Part {
 		this.builder = builder; 
 	}
 	
-	public Part set(String property, String value) {
-		switch (property) {
-		case MESH_URI:
-			mesh.setUri(value);
-			break;
-		default:
-			break;
-		}
-		return this;
-	}
-	public Part set(String property, int value) {
-		switch (property) {
-		case MATERIAL_ID:
-			materialID = value;
-			break;
-		case OUTPUT_ID:
-			outputID = value;
-			break;
-		default:
-			System.err.println("Error: can not match property " + property + " in part.");
-			break;
-		}
+	public Part set(String property, Object value) {
+		setProperty(this, property, value);
 		return this;
 	}
 	
