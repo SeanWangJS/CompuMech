@@ -11,7 +11,7 @@
 
 上图为程序的基本结构，最上层的SolverBuilder接受一个json格式的配置文件，然后构造求解器Solver类
 ```
-Solver solver = new FVM2DSolverBuilder().parse(config).create();
+Solver solver = new FVM2DSolverBuilder().parseConfig(config).create();
 ```
 
 在SolverBuilder具体实现的内部定义了json解析方案，这里主要利用Gson库进行反序列化，然后形成Config类，包含材料、边界条件、初始条件、计算对象、控制方式、输出方案等等自定义信息。但是这时得到的内容还不够完善，例如材料的json表达
@@ -30,3 +30,32 @@ Solver solver = new FVM2DSolverBuilder().parse(config).create();
 上面对于线弹性材料的描述已足够充分，但是却没有显式指定p波波速、体积模量、剪切模量等信息，而这些内容可以由已知量运算得到。类似的还有很多，因此Config类在生成之后还需要再初始化一次以得到必要的信息。
 
 Processors标签下的内容阐述了核心算法的迭代过程，其中每一个子过程都是一个运算类，依赖于前一过程的计算结果，并且又要推进下一过程的执行，它们之中的一些共享了部分计算中间数据，例如各种单元量（应变率、应力等），节点量（节点力、节点质量等）。这些数据的初始化又依赖于Config内的信息，因此在Config和Processors之间定义了中间数据Components，使用这些数据帮助运算类的生成，可以简化运算类的生成逻辑，使得程序的层次结构更加清晰。
+
+## 运行
+```
+Solver solver = new FVM2DSolverBuilder().parseConfig(config).create();
+solver.run();
+```
+json格式的配置文件设置了计算要求的各种参数，还有网格文件所在路径，具体内容见测试包内的资源文件夹。
+
+## 扩展性
+在processors包中定义了各种运算类，以计算得到必要的和感兴趣的中间过程场变量，当然也可以自定义运算类。首先是实现Processor接口，然后向FieldData注册场变量名称（**变量名必须以"node\_"或"elem\_"开头**，因为FieldData在初始化的时候要为其分配数组空间，而节点量和单元量的数组长度不一样），例如
+```
+FieldData.regist("node_pressure");
+```
+自定义运算类需要的场变量可以通过注解方式进行依赖注入，例如
+```
+@Injection
+public void setData(FieldData fd, MaterialProperty mp) {
+    nodePressure = fd.get("node_pressure");
+    ....
+}
+```
+程序将把FieldData和MaterialProperty注入到新建类，然后可以在自有方法中提取所需场量。
+最后，在Blueprint实现中的适当位置添加上自定义运算类
+```
+...
+registProcessor(<name>, <ClassName>.class);
+...
+```
+就可以让新加入的过程参与运算，如果要输出场量，则需要在配置文件中的output节点添加内容。
