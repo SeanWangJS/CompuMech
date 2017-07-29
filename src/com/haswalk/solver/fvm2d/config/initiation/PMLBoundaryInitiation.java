@@ -48,8 +48,9 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 				double[] dist = new double[applyNodesId.size() * layerNum];
 				
 				int[] PMLNodesIds = new int[applyNodesId.size() * layerNum];
+				int[] PMLBoundNodesID = new int[applyNodesId.size()];
 				
-				create(verts, elems, dist, PMLNodesIds, size, norm, bounds, applyNodesId, layerNum, total);
+				create(verts, elems, dist, PMLNodesIds, PMLBoundNodesID, size, norm, bounds, applyNodesId, layerNum, total);
 				
 				vertices.addAll(verts);
 				elements.addAll(elems);
@@ -65,6 +66,7 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 				pml.setDelta(delta);
 				pml.setDist(dist);
 				pml.setPMLNodesIds(PMLNodesIds);
+				pml.setPMLBoundNodesID(PMLBoundNodesID);
 			}
 			
 		});
@@ -86,7 +88,7 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 		return idsMap;
 	}
 	
-	private void create(List<double[]> verts, List<int[]> elems, double[] dist, int[] PMLNodesId, double size, 
+	private void create(List<double[]> verts, List<int[]> elems, double[] dist, int[] PMLNodesId, int[] PMLBoundNodesID , double size, 
 			double[] norm, List<double[]> bounds, List<Integer> bNodesId, int n, int total) {
 		int m = bounds.size();
 		for(int i = 0; i < n; i++) {
@@ -95,8 +97,12 @@ public class PMLBoundaryInitiation implements InitiationMethod{
 				verts.add(new double[]{v[0] + (i + 1) *norm[0] * size, v[1] +(i + 1)* norm[1] * size});
 				dist[i * m + j] = size * (i+ 1);
 				PMLNodesId[i * m + j] = total + i * m + j;
+				if(i == n - 1) {
+					PMLBoundNodesID[j] = total + i * m + j;
+				}
 			}
 		}
+		
 		
 		for(int i = 0; i < m - 1; i++){ 
 			elems.add(new int[]{bNodesId.get(i), bNodesId.get(i + 1), i + 1 + total, i + total});

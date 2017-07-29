@@ -2,7 +2,7 @@ package com.haswalk.solver.fvm2d.config.boundary;
 
 import java.util.List;
 
-import com.sean.wang.utils.FileIO;
+import com.sean.utils.FileIO;
 
 public class FileLoad extends Load{
 	private String uri;

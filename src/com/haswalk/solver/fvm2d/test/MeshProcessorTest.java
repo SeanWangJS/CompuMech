@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import com.haswalk.solver.fvm2d.util.Geom;
 import com.haswalk.solver.fvm2d.util.MeshProcessor;
-import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.FileIO;
-import com.sean.wang.utils.LsUtil;
+import com.sean.utils.ArrUtil;
+import com.sean.utils.FileIO;
+import com.sean.utils.LsUtil;
 
 
 public class MeshProcessorTest {

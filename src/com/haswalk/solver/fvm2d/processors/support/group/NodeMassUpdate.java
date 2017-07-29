@@ -3,9 +3,9 @@ package com.haswalk.solver.fvm2d.processors.support.group;
 import java.util.List;
 
 import com.haswalk.solver.fvm2d.processors.Processor;
-import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.Geom;
-import com.sean.wang.utils.LsUtil;
+import com.sean.utils.ArrUtil;
+import com.sean.utils.Geom;
+import com.sean.utils.LsUtil;
 
 public class NodeMassUpdate implements Processor {
 	private List<List<Integer>> nodesE;

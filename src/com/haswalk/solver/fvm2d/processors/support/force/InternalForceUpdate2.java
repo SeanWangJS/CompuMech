@@ -2,7 +2,7 @@ package com.haswalk.solver.fvm2d.processors.support.force;
 
 import java.util.List;
 
-import com.sean.wang.utils.ArrUtil;
+import com.sean.utils.ArrUtil;
 
 public class InternalForceUpdate2 {
 

@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import com.haswalk.solver.fvm2d.util.ListableMap;
-import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.FileIO;
+import com.sean.utils.ArrUtil;
+import com.sean.utils.FileIO;
 import com.udojava.evalex.Expression;
 
 public class Mtest {

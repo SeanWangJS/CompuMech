@@ -21,7 +21,7 @@ import com.haswalk.solver.fvm2d.config.deserializer.MaterialDeserializer;
 import com.haswalk.solver.fvm2d.config.part.BoundaryConditionApplyPosition;
 import com.haswalk.solver.fvm2d.config.part.Gauge;
 import com.haswalk.solver.fvm2d.config.part.Mesh;
-import com.sean.wang.utils.DouArr;
+import com.sean.utils.DouArr;
 
 public class ConfigParserTest {
 

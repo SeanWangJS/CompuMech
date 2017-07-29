@@ -1,0 +1,49 @@
+{
+  'config': {
+    'materials': {
+      '1': {
+        'density': 2490,
+        'elasticModule': 3.27e10
+      },
+      '2':{
+      	'density': 2000,
+      	'elasticModule': 1.56e10
+      }
+    },
+     
+    'boundaries': {
+      '1':{
+        'load': {
+          'uri': 'E:/fvm1d/1/load.txt'
+        }
+      },
+      '2':{
+        'load': {
+          't': [0, 0.01, 0.02],
+          'value': [0, 10000, 0]
+        }
+      }
+      '3':{
+        't': [0,  0.01],
+        'exp': ["SIN(200*PI*t)"]
+      }
+    }
+    
+    'parts':{
+      '1':{
+        'materialID': 1,
+        'boundaryID': 1,
+        'mesh': {
+          'uri':'E:/fvm1d/1/mesh.txt'
+        },
+        'boundary':{
+        
+        },
+        'gauge':{
+          
+        }
+      }
+    }
+    
+  }
+}

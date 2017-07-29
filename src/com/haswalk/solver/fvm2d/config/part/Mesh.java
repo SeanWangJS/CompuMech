@@ -2,7 +2,7 @@ package com.haswalk.solver.fvm2d.config.part;
 
 import java.util.List;
 
-import com.sean.wang.utils.FileIO;
+import com.sean.utils.FileIO;
 import com.sean.wang.utils.mesh.MeshProcessor;
 
 public class Mesh {
