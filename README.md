@@ -7,7 +7,7 @@
 ## 程序结构
 <!--![](https://github.com/SeanWangJS/compu_mech/raw/develop/resource/arch.PNG)-->
 
-<img src="https://github.com/SeanWangJS/compu_mech/raw/develop/resource/arch.PNG" height="80%" width="80%" />
+<img src="https://github.com/SeanWangJS/compu_mech/raw/master/resource/arch.PNG" height="80%" width="80%" />
 
 上图为程序的基本结构，最上层的SolverBuilder接受一个json格式的配置文件，然后构造求解器Solver类
 ```
