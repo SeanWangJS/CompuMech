@@ -25,6 +25,22 @@ public class MeshProcessor {
 			nodesE.get(elem[1]).add(i);
 		}
 		
+		for(List<Integer> ean : nodesE) {
+			if(ean.size() == 1) {
+				continue;
+			}
+			double ec1 = centerOf(ean.get(0));
+			double ec2 = centerOf(ean.get(1));
+			if(ec1 > ec2) {
+				
+			}
+		}
+		
+	}
+	
+	private double centerOf(int eid) {
+		int[] elem = elements.get(eid);
+		return (vertices.get(elem[0]) + vertices.get(elem[1])) / 2.0;
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.haswalk.solver.fvm2d.components.TimeControl;
 import com.haswalk.solver.fvm2d.processors.Processor;
-import com.sean.wang.utils.LsUtil;
+import com.sean.utils.LsUtil;
 
 public class TimestepUpdate implements Processor{
 

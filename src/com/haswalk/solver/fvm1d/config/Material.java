@@ -2,22 +2,26 @@ package com.haswalk.solver.fvm1d.config;
 
 import com.haswalk.jsonutil.Serialize;
 import com.haswalk.solver.fvm1d.util.SetMethod;
+import com.haswalk.solver.fvm1d.util.ToString;
 
-public class Material implements SetMethod{
+public class Material implements SetMethod, ToString{
 
 	public final static String ELASTIC_MODULE = "elasticModule";
 	public final static String DENSITY = "density";
 	
+	@Serialize
 	private int id;
+	
 	private Config1DBuilder builder;
 	
 	@Serialize
 	private double elasticModule;
 	@Serialize
 	private double density;
-
-	public static Material create(int id, Config1DBuilder builder) {
-		return new Material().setId(id).setBuilder(builder);
+	
+	public Material(int id, Config1DBuilder builder) {
+		this.id = id;
+		this.builder = builder;
 	}
 	
 	public Material set(String property, Object value){
@@ -25,14 +29,8 @@ public class Material implements SetMethod{
 		return this;
 	}
 	
-	public Material setId(int id) {
+	public void setId(int id) {
 		this.id = id;
-		return this;
-	}
-	
-	public Material setBuilder(Config1DBuilder builder) {
-		this.builder = builder;
-		return this;
 	}
 	
 	public int getId() {
@@ -45,17 +43,13 @@ public class Material implements SetMethod{
 	}
 	
 	public String toString() {
-		return new StringBuilder()
-				.append("{'elasticModule': " + elasticModule + ", 'density': " +density+ "}")
-				.toString();
+		return asString();
 	}
 	
-	public Material setDensity(double density) {
+	public void setDensity(double density) {
 		this.density = density;
-		return this;
 	}
-	public Material setElasticModule(double elasticModule) {
+	public void setElasticModule(double elasticModule) {
 		this.elasticModule = elasticModule;
-		return this;
 	}
 }

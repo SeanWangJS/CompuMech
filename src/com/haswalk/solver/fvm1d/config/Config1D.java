@@ -3,19 +3,20 @@ package com.haswalk.solver.fvm1d.config;
 import java.util.HashMap;
 
 import com.haswalk.jsonutil.Serialize;
+import com.haswalk.solver.fvm1d.util.ToString;
 
-public class Config1D {
+public class Config1D implements ToString{
 
 	@Serialize
-	private HashMap<Integer, Material> materials;
+	private HashMap<Integer, Material> materials = new HashMap<>();
 	@Serialize
-	private HashMap<Integer, Boundary> boundaries;
+	private HashMap<Integer, BoundaryCondition> boundaries = new HashMap<>();
 	@Serialize
-	private HashMap<Integer, Part> parts;
+	private HashMap<Integer, Part> parts = new HashMap<>();
 	@Serialize
 	private Control control;
 	@Serialize
-	private HashMap<Integer, Output> outputs;
+	private HashMap<Integer, Output> outputs = new HashMap<>();
 	
 	public void init(){
 		
@@ -23,17 +24,13 @@ public class Config1D {
 	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("materials: \r\n" + materials.toString() + "\r\nboundaries: \r\n"  
-		+ boundaries.toString() + "\r\nparts: \r\n" + parts.toString() + "\r\ncontrol: \r\n" + control.toString() 
-		+ "\r\noutputs: \r\n" + outputs.toString() + "\r\n"); 
-		return super.toString();
+		return asString();
 	}
 	
 	public void putMaterial(Material material) {
 		materials.put(material.getId(), material);
 	}
-	public void putLoad(Boundary load) {
+	public void putLoad(BoundaryCondition load) {
 		boundaries.put(load.getId(), load);
 	}
 	public void putPart(Part part) {
@@ -49,10 +46,10 @@ public class Config1D {
 	public void setMaterials(HashMap<Integer, Material> materials) {
 		this.materials = materials;
 	}
-	public HashMap<Integer, Boundary> getBoundaies() {
+	public HashMap<Integer, BoundaryCondition> getBoundaies() {
 		return boundaries;
 	}
-	public void setBoundaries(HashMap<Integer, Boundary> boundaries) {
+	public void setBoundaries(HashMap<Integer, BoundaryCondition> boundaries) {
 		this.boundaries = boundaries;
 	}
 	public HashMap<Integer, Part> getParts() {
@@ -73,7 +70,5 @@ public class Config1D {
 	public void setOutputs(HashMap<Integer, Output> outputs) {
 		this.outputs = outputs;
 	}
-	
-	
 	
 }

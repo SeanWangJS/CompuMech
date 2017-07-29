@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sean.wang.utils.ArrUtil;
+import com.sean.utils.ArrUtil;
 
 public class SingleItemGauge {
 

@@ -3,9 +3,9 @@ package com.haswalk.solver.fvm2d.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sean.wang.utils.ArrUtil;
-import com.sean.wang.utils.LsUtil;
-import com.sean.wang.utils.Sort;
+import com.sean.utils.ArrUtil;
+import com.sean.utils.LsUtil;
+import com.sean.utils.Sort;
 import com.sean.wang.utils.obj.Pair;
 
 public class MeshProcessor {
@@ -60,7 +60,7 @@ public class MeshProcessor {
 			
 			List<Integer> ean = new ArrayList<>();
 			for(int j = 0; j < eids.size(); j++) {
-				ean.add(pairs.get(j).getId());
+				ean.add(pairs.get(j).getOther());
 			}
 			nodesE.add(ean);
 		}

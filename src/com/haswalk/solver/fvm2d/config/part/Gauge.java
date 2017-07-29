@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sean.wang.utils.Geom;
+import com.sean.utils.Geom;
 
 public class Gauge {
 	private boolean fixed = false;

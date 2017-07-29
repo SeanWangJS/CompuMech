@@ -2,8 +2,8 @@ package com.haswalk.solver.fvm2d.test;
 
 import org.junit.Test;
 
-import com.sean.wang.utils.ArrayProcessor;
-import com.sean.wang.utils.FileIO;
+import com.sean.utils.ArrayProcessor;
+import com.sean.utils.FileIO;
 
 public class DataFormatFromAdyn {
 

@@ -1,11 +1,13 @@
 package com.haswalk.solver.fvm1d.test;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,12 +19,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.haswalk.jsonutil.GeneralDeserializer;
+import com.haswalk.jsonutil.Serialize;
 import com.haswalk.jsonutil.testresource.D;
 import com.haswalk.jsonutil.testresource.E;
 import com.haswalk.jsonutil.testresource.F;
 import com.haswalk.jsonutil.testresource.G;
 import com.haswalk.jsonutil.testresource.H;
-import com.sean.wang.utils.FileIO;
+import com.haswalk.solver.fvm1d.test.resource.St;
+import com.haswalk.solver.fvm1d.util.ToString;
+import com.sean.utils.FileIO;
 
 public class MTest {
 
@@ -188,5 +193,44 @@ public class MTest {
 		System.out.println(d.getP1());
 	}
 
+	@Test
+	public void test12() {
+		St st = new St();
+		String s = st.toString();
+		System.out.println(s);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonObject json = gson.fromJson(s, JsonObject.class);
+		
+		String ss = gson.toJson(json);
+		FileIO.write(ss, "E:/fvm1d/.json");
+		System.out.println(gson.toJson(json));
+	}
+	
+	@Test
+	public void test13() {
+//		List<Double> vertices = FileIO.readDoubleList("E:/fvm1d/1/vertices.txt");
+//		List<int[]> elements = FileIO.readIntArrList("E:/fvm1d/1/elements.txt","\\s+");
+//		FileIO.StandardFormat1DMesh.writeToOne(vertices, elements, "E:/fvm1d/1/mesh.txt");
+		
+		List<int[]> elements = FileIO.StandardFormat1DMesh.readElements("E:/fvm1d/1/mesh.txt");
+		elements.forEach(e -> System.out.println(e[0] + ", " + e[1]));
+		
+		List<Double> vertices = FileIO.StandardFormat1DMesh.readVertices("E:/fvm1d/1/mesh.txt");
+		vertices.forEach(System.out::println);
+	}
+	
+	@Test
+	public void test14() throws IOException {
+//		Pattern pattern = Pattern.compile("\\$vertices\\$(.*)\\$end\\$");
+//		String str = new String(Files.readAllBytes(Paths.get("E:/fvm1d/1/mesh.txt")));
+//		String s = str.replaceAll("\r\n", "\t");
+//		
+//		Matcher m = pattern.matcher(s);
+//		System.out.println(m.find());
+//		System.out.println(m.group(1).trim());
+		
+		System.out.println("".split("\\s+").length);
+	}
+	
 }
 

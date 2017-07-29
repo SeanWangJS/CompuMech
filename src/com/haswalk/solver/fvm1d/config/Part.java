@@ -1,22 +1,34 @@
 package com.haswalk.solver.fvm1d.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.haswalk.jsonutil.Serialize;
+import com.haswalk.solver.fvm1d.config.support.part.BoundaryPosition;
+import com.haswalk.solver.fvm1d.config.support.part.Mesh;
 import com.haswalk.solver.fvm1d.util.SetMethod;
+import com.haswalk.solver.fvm1d.util.ToString;
 
-public class Part implements SetMethod{
+public class Part implements SetMethod, ToString{
 
-	public final static String MESH_URI = "meshUri";
 	public final static String MATERIAL_ID = "materialID";
 	public final static String OUTPUT_ID = "outputID";
 	public final static String GAUGE_POINTS = "gaugePoints";
 	
+	@Serialize
 	private int id;
 	private Config1DBuilder builder;
 
+	@Serialize
 	private int materialID;
+	@Serialize
 	private int outputID;
-	private Mesh mesh = new Mesh();
-	private Boundary boundary = new Boundary();
-	private double[][] gauges;
+	@Serialize
+	private double[][] gaugePoints;
+	@Serialize
+	private List<BoundaryPosition> boundaryPositions = new ArrayList<>();
+	@Serialize
+	private Mesh mesh;
 	
 	public Part(int id, Config1DBuilder builder) {
 		this.id = id;
@@ -28,19 +40,30 @@ public class Part implements SetMethod{
 		return this;
 	}
 	
-	public Part set(String property1, int value1, String property2, double[] value2){
-		boundary.setLoadID(value1);
-		boundary.setPosition(value2);
-		return this;
+	public void setMaterialID(int materialID) {
+		this.materialID = materialID;
 	}
 	
-	public Part set(String property, double[][] value) {
-		gauges = value;
-		return this;
+	public void setOutputID(int outputID) {
+		this.outputID = outputID;
+	}
+	
+	public void setGaugePoints(double[][] gaugePoints) {
+		this.gaugePoints = gaugePoints;
 	}
 	
 	public int getId() {
 		return id;
+	}
+	
+	public BoundaryPosition boundaryPosition() {
+		BoundaryPosition bp = new BoundaryPosition(this);
+		boundaryPositions.add(bp);
+		return bp;
+	}
+	public Mesh mesh() {
+		mesh = new Mesh(this);
+		return mesh;
 	}
 	
 	public Config1DBuilder build() {
@@ -50,22 +73,9 @@ public class Part implements SetMethod{
 	
 	public void init() {}
 	
-	public class Mesh{
-		private String uri;
-		public void setUri(String uri) {
-			this.uri = uri;
-		}
-		public void init(){}
+	@Override
+	public String toString() {
+		return asString();
 	}
-	public class Boundary{
-		private int loadID;
-		private double[] position;
-		public void setLoadID(int loadID) {
-			this.loadID = loadID;
-		}
-		public void setPosition(double[] position) {
-			this.position = position;
-		}
-		public void init() {}
-	}
+
 }

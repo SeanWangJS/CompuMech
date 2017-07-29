@@ -2,12 +2,13 @@ package com.haswalk.solver.fvm1d.config;
 
 import java.util.HashMap;
 
-import com.haswalk.solver.fvm1d.config.support.ExpLoadBC;
-import com.haswalk.solver.fvm1d.config.support.FileLoadBC;
-import com.haswalk.solver.fvm1d.config.support.PiecewiseLoadBC;
+import com.haswalk.jsonutil.Serialize;
+import com.haswalk.solver.fvm1d.config.support.boundarycondition.ExpLoadBC;
+import com.haswalk.solver.fvm1d.config.support.boundarycondition.FileLoadBC;
+import com.haswalk.solver.fvm1d.config.support.boundarycondition.PiecewiseLoadBC;
 import com.haswalk.solver.fvm1d.util.SetMethod;
 
-public abstract class Boundary implements SetMethod{
+public abstract class BoundaryCondition implements SetMethod{
 
 	public final static String FILE_LOAD_BC = "fileLoadBC";
 	public final static String EXP_LOAD_BC = "expLoadBC";
@@ -15,7 +16,9 @@ public abstract class Boundary implements SetMethod{
 	public final static String SYMMETRIC_BC = "symmetricBC";
 	public final static String PML_BC = "pmlBC";
 	
-	private final static HashMap<String, Boundary> boundaryType = new HashMap<>(); 
+	public final static String ID = "id";
+	
+	private final static HashMap<String, BoundaryCondition> boundaryType = new HashMap<>(); 
 	
 	static{
 		boundaryType.put(FILE_LOAD_BC, new FileLoadBC());
@@ -23,26 +26,27 @@ public abstract class Boundary implements SetMethod{
 		boundaryType.put(EXP_LOAD_BC, new ExpLoadBC());
 	}
 	
-	private int id;
-	private Config1DBuilder builder;
+	@Serialize
+	protected int id;
+	protected Config1DBuilder builder;
 	
-	public static Boundary create(int id, String type, Config1DBuilder builder){
+	public static BoundaryCondition create(int id, String type, Config1DBuilder builder){
 		return boundaryType.get(type).setId(id).setBuilder(builder);
 	}
 	
-	public Boundary set(String property, Object value){
+	public BoundaryCondition set(String property, Object value){
 		setProperty(this, property, value);
 		return this;
 	}
 
 	public abstract void init();
 	
-	public Boundary setId(int id) {
+	public BoundaryCondition setId(int id) {
 		this.id = id;
 		return this;
 	}
 	
-	public Boundary setBuilder(Config1DBuilder builder){
+	public BoundaryCondition setBuilder(Config1DBuilder builder){
 		this.builder = builder;
 		return this;
 	}
