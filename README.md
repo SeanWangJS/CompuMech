@@ -5,4 +5,4 @@
 基于有限体积法的动力学计算程序，目前具备二维、单物体、线弹性强度模型的计算能力，能够施加集中力、分布力边界条件以及对称边界条件。网格类型可以是四边形   单元、三角形单元或者混合型（其中三角形网格能有效解决集中冲击荷载造成的沙漏变形效应，从而在无限大介质点源力冲击作用下能得到与Pilant W.L推导的理论解相差无几的数值解）。
 
 ## 程序结构
-![image arch](http://jiantuku.com/#/albums/7770)
+![](https://github.com/SeanWangJS/compu_mech/raw/develop/resource/arch.PNG)
