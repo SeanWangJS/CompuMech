@@ -44,20 +44,11 @@ mvn test -Dtest=com.haswalk.solver.SolverTest#test
 ### 依赖
 依赖资源由maven管理，除中央仓库外，还需要手动安装位于 dependencies 文件夹中的依赖到本地仓库。
 ```
-<<<<<<< HEAD
 mvn install:install-file -Dfile=hasutil-1.0-SNAPSHOT.jar -DgroupId=com.haswalk.hasutil -DartifactId=hasutil -Dversion=1.0-SNAPSHOT -Dpackaging=jar
 mvn install:install-file -Dfile=chauncey-1.0-SNAPSHOT.jar -DgroupId=com.chauncey -DartifactId=chauncey -Dversion=1.0-SNAPSHOT -Dpackaging=jar
 ```
 
 ### 在线计算
-
-
-=======
-json格式的配置文件设置了计算要求的各种参数，还有网格文件所在路径，具体内容见main包内的资源文件夹。
-
-## 依赖
-依赖资源由maven管理，值得注意的是，hasutil包在本地仓库，可以下载hasutil项目然后 mvn install 到本地仓库。
->>>>>>> 79430118a8b68f50fd7fb646c76aed74de2db747
 
 ## 扩展性
 在processors包中定义了各种运算类，以计算得到必要的和感兴趣的中间过程场变量，当然也可以自定义运算类。首先是实现Processor接口，然后向FieldData注册场变量名称（**变量名必须以"node\_"或"elem\_"开头**，因为FieldData在初始化的时候要为其分配数组空间，而节点量和单元量的数组长度不一样），例如
