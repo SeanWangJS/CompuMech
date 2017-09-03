@@ -1,16 +1,15 @@
 package com.haswalk.solver.fvm1d.processors.impl;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-
+import com.chauncey.DblArr;
 import com.haswalk.solver.fvm1d.processors.Processor;
 
 public class ForceUpdate implements Processor{
 
-	private INDArray force;
-	private INDArray stress;
+	private DblArr force;
+	private DblArr stress;
 	
 	@Override
-	public void run() {
+	public void calc() {
 		
 		
 	}

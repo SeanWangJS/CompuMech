@@ -26,10 +26,10 @@ public class SaveItem {
 	}
 
 	public String toString() {
-		return new StringBuilder().append("save item: \n")
-			   .append("increment: " + inc + "\n")
-			   .append("items: " + items + "\n")
-			   .append("end").toString();
+		return "save item: \n" +
+				"increment: " + inc + "\n" +
+				"items: " + items + "\n" +
+				"end";
 	}
 	
 }

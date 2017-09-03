@@ -6,11 +6,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 import com.udojava.evalex.Expression;
 
 public class Mtest {

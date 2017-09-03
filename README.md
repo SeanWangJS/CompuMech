@@ -29,13 +29,17 @@ Solver solver = new FVM2DSolverBuilder().parseConfig(config).create();
 ```
 上面对于线弹性材料的描述已足够充分，但是却没有显式指定p波波速、体积模量、剪切模量等信息，而这些内容可以由已知量运算得到。类似的还有很多，因此Config类在生成之后还需要再初始化一次以得到必要的信息。
 
-Processors标签下的内容阐述了核心算法的迭代过程，其中每一个子过程都是一个运算类，依赖于前一过程的计算结果，并且又要推进下一过程的执行，它们之中的一些共享了部分计算中间数据，例如各种单元量（应变率、应力等），节点量（节点力、节点质量等）。这些数据的初始化又依赖于Config内的信息，因此在Config和Processors之间定义了中间数据Components，使用这些数据帮助运算类的生成，可以简化运算类的生成逻辑，使得程序的层次结构更加清晰。
+Processors包下的内容阐述了核心算法的迭代过程，其中每一个子过程都是一个运算类，依赖于前一过程的计算结果，并且又要推进下一过程的执行，它们之中的一些共享了部分计算中间数据，例如各种单元量（应变率、应力等），节点量（节点力、节点质量等）。这些数据的初始化又依赖于Config内的信息，因此在Config和Processors之间定义了中间数据Components，使用这些数据帮助运算类的生成，可以简化运算类的生成逻辑，使得程序的层次结构更加清晰。
 
 ## 运行
+### 本地运行
+本实例计算一个长柱模型在一侧受到三角形冲击荷载作用下的力学响应。
 ```
-Solver solver = new FVM2DSolverBuilder().parseConfig(config).create();
-solver.run();
+mvn test -Dtest=com.haswalk.solver.SolverTest#test
 ```
+![](/resources/result1.png)
+### 在线计算平台
+
 json格式的配置文件设置了计算要求的各种参数，还有网格文件所在路径，具体内容见main包内的资源文件夹。
 
 ## 依赖

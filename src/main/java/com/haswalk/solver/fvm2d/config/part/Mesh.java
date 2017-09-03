@@ -23,9 +23,11 @@ public class Mesh {
 	}
 	
 	public void init() {
-		if(uri == null) {
-			uri = System.getProperty(uri2[0]) + uri2[1];
-		}
+//		if(uri == null) {
+//			uri = System.getProperty(uri2[0]) + uri2[1];
+//		}
+		uri = System.getProperty("user.dir") + "/src/resources/mesh.txt";
+		System.out.println("Read mesh from: " + uri);
 		tuple<List<double[]>, List<int[]>> t = IO.stdMesh2d.load(uri);
 		vertices = t.fst;
 		elements = t.sec;

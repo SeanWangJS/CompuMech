@@ -6,7 +6,7 @@ import com.haswalk.solver.Solver;
 import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.support.TimestepUpdate;
 import com.haswalk.solver.fvm2d.util.FinalHit;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public class FVM2DSolver implements Solver{
 
@@ -17,7 +17,7 @@ public class FVM2DSolver implements Solver{
 	}
 	private void after(){
 		List<FinalHit> hits = processors.getWhichIsImplementationOf(FinalHit.class);
-		hits.forEach(hit -> hit.hit());
+		hits.forEach(FinalHit::hit);
 		
 	}
 	
@@ -26,14 +26,12 @@ public class FVM2DSolver implements Solver{
 		before();
 		while(true) {
 			
-			processors.forEach((name, p) -> {
-				p.calc();
-			});
+			processors.forEach((name, p) -> p.calc());
 			if(((TimestepUpdate)processors.get(Processor.TIMESTEP_UPDATE)).isTimesUp()) {
 				break;
 			}
 		}
-		System.out.println("solve complete");
+		System.out.println("complete");
 		after();
 		return this;
 	}

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+import com.haswalk.hasutil.IO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,16 +13,22 @@ import com.haswalk.solver.Solver;
 import com.haswalk.solver.fvm2d.FVM2DSolverBuilder;
 
 public class SolverTest {
-	private String json = null;
-	@Before
-	public void before() throws IOException{
-		json = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), 
-				"src/main/resources/config.json")));
-	}
+
 	@Test
-	public void testSolve(){
+	public void test() throws IOException {
+		String config = new String(
+				Files.readAllBytes(Paths
+						.get(System.getProperty("user.dir") + "/src/test/resources/config.json")));
+		String mesh = new String(
+				Files.readAllBytes(Paths
+						.get(System.getProperty("user.dir") + "/src/test/resources/mesh.txt"))
+		);
+
+		IO.write(mesh, System.getProperty("user.dir") +  "/src/resources/mesh.txt");
 		FVM2DSolverBuilder builder = new FVM2DSolverBuilder();
-		Solver solver = builder.parseConfig(json).create();
+		Solver solver = builder.parseConfig(config).create();
 		solver.run();
 	}
+
+
 }

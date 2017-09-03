@@ -24,7 +24,6 @@ public class Saver implements Processor, FinalHit{
 		if(inc > 0 && time.getCount() % inc == 0) {
 			ss.forEach(s -> s.write(time.getCount()));	
 		}
-		return;
 	}
 	
 	@Override

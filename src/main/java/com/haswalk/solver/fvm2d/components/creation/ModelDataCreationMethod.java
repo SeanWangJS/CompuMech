@@ -9,7 +9,7 @@ import com.haswalk.solver.fvm2d.components.creation.modeldata.NOECreation;
 import com.haswalk.solver.fvm2d.components.creation.modeldata.NONCreation;
 import com.haswalk.solver.fvm2d.components.creation.modeldata.VerticesCreation;
 import com.haswalk.solver.fvm2d.config.Config;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public class ModelDataCreationMethod implements ComponentCreationMethod{
 

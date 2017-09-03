@@ -15,9 +15,9 @@ public class GaugeItem {
 	}
 
 	public String toString() {
-		return new StringBuilder().append("gauge item: \n")
-			   .append("increment: " + inc + "\n")
-			   .append("items: " + items + "\n")
-			   .append("end\n").toString();
+		return "gauge item: \n" +
+				"increment: " + inc + "\n" +
+				"items: " + items + "\n" +
+				"end\n";
 	}
 }

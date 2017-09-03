@@ -1,4 +1,4 @@
-package com.haswalk.solver.fvm2d.util;
+package com.haswalk.solver.util;
 
 import java.util.ArrayList;
 import java.util.List;

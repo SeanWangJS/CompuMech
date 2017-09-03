@@ -8,7 +8,7 @@ import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.ProcessorFactory;
 import com.haswalk.solver.fvm2d.processors.creation.TimestepUpdateCreationMethod;
 import com.haswalk.solver.fvm2d.processors.extend.MessageUpdate;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public class Assembler {
 

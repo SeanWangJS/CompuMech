@@ -1,17 +1,17 @@
 package com.haswalk.solver.fvm1d.processors.impl;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
+import com.chauncey.DblArr;
 
 import com.haswalk.solver.fvm1d.processors.Processor;
 
 public class StressUpdate implements Processor{
 
 	private double E;
-	private INDArray strain;
-	private INDArray stress;
+	private DblArr strain;
+	private DblArr stress;
 	
 	@Override
-	public void run() {
+	public void calc() {
 		strain.mul(E, stress);
 	}
 

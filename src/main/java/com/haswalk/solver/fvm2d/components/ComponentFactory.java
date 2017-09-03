@@ -1,7 +1,7 @@
 package com.haswalk.solver.fvm2d.components;
 
 import com.haswalk.solver.fvm2d.config.Config;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public class ComponentFactory {
 

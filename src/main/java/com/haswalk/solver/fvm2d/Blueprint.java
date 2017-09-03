@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.haswalk.solver.fvm2d.blueprint.ElasticModelBlueprint;
 import com.haswalk.solver.fvm2d.components.ComponentCreationMethod;
 import com.haswalk.solver.fvm2d.processors.ProcessorCreationMethod;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public abstract class Blueprint {
 

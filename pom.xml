@@ -34,13 +34,13 @@
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>org.nd4j</groupId>
-      <artifactId>nd4j-native</artifactId>
-      <version>0.8.0</version>
-    </dependency>
-    <dependency>
       <groupId>com.haswalk.hasutil</groupId>
       <artifactId>hasutil</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.chauncey</groupId>
+      <artifactId>chauncey</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>

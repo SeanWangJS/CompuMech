@@ -20,11 +20,11 @@ public class FVM2DSolverBuilder implements SolverBuilder{
 
 	private Config config = new Config();
 
-	public FVM2DSolverBuilder mesh(String folder, String meshContent) {
-		IO.write(meshContent, System.getProperty("user.dir") + "/" + folder, "mesh.txt");
-//		System.out.println(System.getProperty("user.dir") + "/" + folder);
-		return this;
-	}
+//	public FVM2DSolverBuilder mesh(String folder, String meshContent) {
+//		IO.write(meshContent, System.getProperty("user.dir") + "/" + folder, "mesh.txt");
+//		System.out.println("mesh uri: " + System.getProperty("user.dir") + "/" + folder + "mesh.txt");
+//		return this;
+//	}
 
 	@Override
 	public SolverBuilder parseConfig(String configJson) {

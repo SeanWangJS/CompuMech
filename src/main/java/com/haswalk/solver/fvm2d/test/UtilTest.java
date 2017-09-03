@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.haswalk.solver.fvm2d.processors.Processor;
 import com.haswalk.solver.fvm2d.processors.extend.Saver;
 import com.haswalk.solver.fvm2d.util.FinalHit;
-import com.haswalk.solver.fvm2d.util.ListableMap;
+import com.haswalk.solver.util.ListableMap;
 
 public class UtilTest {
 	
