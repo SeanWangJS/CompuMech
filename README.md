@@ -33,17 +33,23 @@ Processors包下的内容阐述了核心算法的迭代过程，其中每一个�
 
 ## 运行
 ### 本地运行
-本实例计算一个长柱模型在一侧受到三角形冲击荷载作用下的力学响应。
+本实例计算一个长柱模型在一侧受到三角形冲击荷载作用下的力学响应。json格式的配置文件设置了计算要求的各种参数，具体内容见test包内的资源文件夹。
 ```
 mvn test -Dtest=com.haswalk.solver.SolverTest#test
 ```
+下图为距离左端点 20m 处的时间(s)--应力(Pa)曲线
 ![](/resources/result1.png)
-### 在线计算平台
 
-json格式的配置文件设置了计算要求的各种参数，还有网格文件所在路径，具体内容见main包内的资源文件夹。
+### 依赖
+依赖资源由maven管理，除中央仓库外，还需要手动安装位于 dependencies 文件夹中的依赖到本地仓库。
+```
+mvn install:install-file -Dfile=hasutil-1.0-SNAPSHOT.jar -DgroupId=com.haswalk.hasutil -DartifactId=hasutil -Dversion=1.0-SNAPSHOT -Dpackaging=jar
+mvn install:install-file -Dfile=chauncey-1.0-SNAPSHOT.jar -DgroupId=com.chauncey -DartifactId=chauncey -Dversion=1.0-SNAPSHOT -Dpackaging=jar
+```
 
-## 依赖
-依赖资源由maven管理，值得注意的是，hasutil包在本地仓库，可以下载hasutil项目然后 mvn install 到本地仓库。
+### 在线计算
+
+
 
 ## 扩展性
 在processors包中定义了各种运算类，以计算得到必要的和感兴趣的中间过程场变量，当然也可以自定义运算类。首先是实现Processor接口，然后向FieldData注册场变量名称（**变量名必须以"node\_"或"elem\_"开头**，因为FieldData在初始化的时候要为其分配数组空间，而节点量和单元量的数组长度不一样），例如
