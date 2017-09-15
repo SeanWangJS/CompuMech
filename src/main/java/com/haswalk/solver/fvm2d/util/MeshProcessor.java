@@ -2,7 +2,7 @@ package com.haswalk.solver.fvm2d.util;
 
 import static com.haswalk.hasutil.arr.*;
 import com.haswalk.hasutil.Geom;
-import com.haswalk.hasutil.obj.tuple;
+import com.haswalk.hasutil.obj.Tuple;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,13 +53,13 @@ public class MeshProcessor {
 		for(int nid = 0; nid < NON; nid++) {
 			double[] v = vertices.get(nid);
 			List<Integer> eids = elemsWitchContainsNode.get(nid);
-			List<tuple<Integer, Double>> pairs = new ArrayList<>();
+			List<Tuple<Integer, Double>> pairs = new ArrayList<>();
 			double[] thetas = new double[eids.size()];
 			for(int j = 0; j < eids.size(); j++) {
 				int eid = eids.get(j);
 				double[] c = centers[eid];
 				thetas[j] = com.haswalk.solver.fvm2d.util.Geom.pole_theta(c[0] - v[0], c[1] - v[1]);
-				pairs.add(new tuple<Integer, Double>(eid, thetas[j]) {});
+				pairs.add(new Tuple<Integer, Double>(eid, thetas[j]) {});
 			}
 			pairs.sort(Comparator.comparingDouble(a -> a.sec));
 			List<Integer> ean = new ArrayList<>();

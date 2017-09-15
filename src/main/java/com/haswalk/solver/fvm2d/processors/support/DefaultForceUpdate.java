@@ -30,7 +30,7 @@ public class DefaultForceUpdate implements ForceUpdate {
 	@Override
 	public void calc() {
 		ifu.calc();
-		bfs.forEach(bf -> bf.calc());
+		bfs.forEach(LoadBoundaryApply::calc);
 		hd.calc();
 	}
 

@@ -18,10 +18,10 @@ public class SolverTest {
 	public void test() throws IOException {
 		String config = new String(
 				Files.readAllBytes(Paths
-						.get(System.getProperty("user.dir") + "/src/test/resources/config.json")));
+						.get("E:/fvm/29/config.json")));
 		String mesh = new String(
 				Files.readAllBytes(Paths
-						.get(System.getProperty("user.dir") + "/src/test/resources/mesh.txt"))
+						.get("E:/fvm/29/mesh.txt"))
 		);
 
 		IO.write(mesh, System.getProperty("user.dir") +  "/src/resources/mesh.txt");

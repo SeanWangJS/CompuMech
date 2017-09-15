@@ -1,6 +1,11 @@
 package com.haswalk.solver.fvm2d.config.boundary;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.haswalk.hasutil.IO;
 
@@ -12,7 +17,18 @@ public class FileLoad extends Load{
 	
 	@Override
 	public void init() {
-		List<double[]> load = IO.readDouArrList(uri, "\\s+");
+		List<double[]> load = null;
+		try {
+			load = Stream.of(new String(Files.readAllBytes(Paths.get(uri))).split("\r\n"))
+					.map(line -> {
+						String[] ss = line.split("\\s+");
+						return new double[]{Double.valueOf(ss[0]), Double.valueOf(ss[1])};
+					})
+					.collect(Collectors.toList());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		assert load != null;
 		t = new double[load.size()];
 		value = new double[load.size()];
 		
@@ -36,7 +52,7 @@ public class FileLoad extends Load{
 	}
 	
 	public String toString() {
-		return new StringBuilder().append("uri: " + uri + "\n").toString();
+		return "uri: " + uri + "\n";
 		
 	}
 }

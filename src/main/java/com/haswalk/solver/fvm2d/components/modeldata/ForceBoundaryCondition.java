@@ -22,10 +22,8 @@ public class ForceBoundaryCondition extends BoundaryCondition{
 		return angle;
 	} 
 	public String toString(){
-		StringBuilder builder = new StringBuilder();
-		builder.append("type: " + type)
-			   .append("apply node id: " + applyNodeId + "\n")
-			   .append("angle: " + angle + "\n");
-		return builder.toString();
+		return "type: " + type +
+				"apply node id: " + applyNodeId + "\n" +
+				"angle: " + angle + "\n";
 	}
 }

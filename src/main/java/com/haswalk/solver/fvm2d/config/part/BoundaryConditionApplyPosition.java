@@ -54,8 +54,8 @@ public class BoundaryConditionApplyPosition {
 		StringBuilder builder = new StringBuilder();
 		builder.append("boundary conditions apply nodes id: \n");
 		applyNodesIdMap.forEach((id, nodesID) -> {
-			builder.append(id + ": " + nodesID + "\n");
-			builder.append("size: " + nodesID.size() + "\n");
+			builder.append(id).append(": ").append(nodesID).append("\n");
+			builder.append("size: ").append(nodesID.size()).append("\n");
 		});
 		builder.append("end");
 		return builder.toString();
