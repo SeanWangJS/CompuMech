@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm2d.config.part;
 
-import com.haswalk.hasutil.Geom;
+import com.haswalk.util.cg.Geom;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ public class BoundaryConditionApplyPosition {
 	
 	private HashMap<Integer, double[][]> idLineMap;
 	private HashMap<Integer, double[]> idCirMap;
+	private HashMap<Integer, double[]> idPointMap;
 	private HashMap<Integer, List<Integer>> applyNodesIdMap;
 	private double tolerance = 1e-5;
 
@@ -17,6 +18,7 @@ public class BoundaryConditionApplyPosition {
 		applyNodesIdMap = new HashMap<>();
 		parseIdLineMap(vertices);
 		parseIdCirMap(vertices);
+		parseIdPointMap(vertices);
 	}
 	private void parseIdCirMap(List<double[]> vertices) {
 		if(idCirMap == null) {
@@ -35,11 +37,19 @@ public class BoundaryConditionApplyPosition {
 		if(idLineMap == null) {
 			return;
 		}
-		idLineMap.forEach((bid, line) -> {
-			applyNodesIdMap.put(bid, Geom.onLineWithinSort(vertices, line[0], line[1], tolerance));
+		idLineMap.forEach((bid, line) ->
+				applyNodesIdMap.put(bid, Geom.onLineWithinSort(vertices, line[0], line[1], tolerance)));
+	}
+
+	private void parseIdPointMap(List<double[]> vertices){
+		if(idPointMap == null) {
+			return;
+		}
+		idPointMap.forEach((bid, point) -> {
+			applyNodesIdMap.put(bid, List.of(Geom.nearest(vertices, point)));
 		});
 	}
-	
+
 	public List<Integer> getBcIds(){
 		List<Integer> bcids = new ArrayList<>();
 		applyNodesIdMap.forEach((id, line) -> bcids.add(id));

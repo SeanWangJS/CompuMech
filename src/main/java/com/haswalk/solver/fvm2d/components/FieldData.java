@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm2d.components;
 
-import com.haswalk.hasutil.Geom;
+import com.haswalk.util.cg.Geom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,6 +112,7 @@ public class FieldData {
 			List<Double> masses = ean.stream().map(j -> eMass[j]).collect(Collectors.toList());
 			for(int j = 0; j < masses.size(); j++) {
 				nMass[i] += masses.get(j) / (double)elements.get(ean.get(j)).length;
+//				nMass[i] += masses.get(j)  / 32.0;
 			}
 		}
 

@@ -3,7 +3,6 @@ package com.haswalk.solver.fvm2d;
 import java.util.HashMap;
 
 import com.google.gson.reflect.TypeToken;
-import com.haswalk.hasutil.IO;
 import com.haswalk.solver.Solver;
 import com.haswalk.solver.SolverBuilder;
 import com.haswalk.solver.fvm2d.config.Boundary;

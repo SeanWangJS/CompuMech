@@ -1,8 +1,8 @@
 package com.haswalk.solver.fvm2d.config.part;
 
-import com.haswalk.hasutil.IO;
-import com.haswalk.hasutil.obj.Tuple;
 import com.haswalk.solver.fvm2d.util.MeshProcessor;
+import com.haswalk.util.io.IO;
+import com.haswalk.util.tuple.Tuple;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ public class Mesh {
 		uri = System.getProperty("user.dir") + "/src/resources/mesh.txt";
 		System.out.println("Read mesh from: " + uri);
 		Tuple<List<double[]>, List<int[]>> t = IO.stdMesh2d.load(uri);
-		vertices = t.fst;
-		elements = t.sec;
+		vertices = t._1;
+		elements = t._2;
 		MeshProcessor mp = new MeshProcessor(vertices, elements);
 		mp.handle();
 		nodesE = mp.getSurrE();

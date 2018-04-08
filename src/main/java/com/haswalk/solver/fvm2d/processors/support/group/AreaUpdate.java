@@ -2,11 +2,11 @@ package com.haswalk.solver.fvm2d.processors.support.group;
 
 import java.util.List;
 
-import com.haswalk.hasutil.Geom;
 import com.haswalk.solver.fvm2d.annotation.Injection;
 import com.haswalk.solver.fvm2d.components.FieldData;
 import com.haswalk.solver.fvm2d.components.ModelData;
 import com.haswalk.solver.fvm2d.processors.Processor;
+import com.haswalk.util.cg.Geom;
 
 import static com.haswalk.solver.fvm2d.components.ModelData.*;
 import static com.haswalk.solver.fvm2d.components.FieldData.*;

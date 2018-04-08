@@ -1,9 +1,8 @@
 package com.haswalk.solver;
 
-import com.haswalk.hasutil.IO;
 import com.haswalk.solver.fvm2d.FVM2DSolverBuilder;
+import com.haswalk.util.io.IO;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

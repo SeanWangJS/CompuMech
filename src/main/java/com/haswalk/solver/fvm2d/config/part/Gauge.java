@@ -1,10 +1,10 @@
 package com.haswalk.solver.fvm2d.config.part;
 
+import com.haswalk.util.cg.Geom;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.haswalk.hasutil.Geom;
 
 public class Gauge {
 	private boolean fixed = false;

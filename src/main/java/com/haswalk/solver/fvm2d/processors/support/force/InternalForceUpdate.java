@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm2d.processors.support.force;
 
-import static com.haswalk.hasutil.arr.*;
+import static com.haswalk.util.arr.Arr.*;
 
 import java.util.List;
 
@@ -40,6 +40,8 @@ public class InternalForceUpdate {
 				double[] p2 = vertices.get(nj);
 				fx += (sx[eid] * (p2[1] - p1[1]) - sxy[eid] * (p2[0] - p1[0])) / 2.0;
 				fy += (sxy[eid] * (p2[1] - p1[1]) - sy[eid] * (p2[0] - p1[0])) / 2.0;
+//				fx += (sx[eid] * (p2[1] - p1[1]) - sxy[eid] * (p2[0] - p1[0])) / 4.0;
+//				fy += (sxy[eid] * (p2[1] - p1[1]) - sy[eid] * (p2[0] - p1[0])) / 4.0;
 			}
 			forceX[i] = fx;
 			forceY[i] = fy;

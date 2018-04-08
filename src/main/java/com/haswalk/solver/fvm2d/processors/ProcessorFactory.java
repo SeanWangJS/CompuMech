@@ -27,7 +27,11 @@ public class ProcessorFactory {
 		Processor processor = null;
 		Components components = componentsMap.get(partId);
 		try {
-			processor = (Processor) clazz.newInstance();
+			try {
+				processor = (Processor) clazz.getDeclaredConstructor().newInstance();
+			} catch (InvocationTargetException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
 		} catch (InstantiationException | IllegalAccessException e1) {
 			System.err.println("Error: create instance of " + name
 					+ " failed. \n...Please check out if you have already regist this class");

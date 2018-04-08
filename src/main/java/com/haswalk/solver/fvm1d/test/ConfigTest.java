@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm1d.test;
 
-import com.haswalk.hasutil.IO;
+import com.haswalk.util.io.IO;
 import org.junit.Test;
 
 import com.google.gson.Gson;

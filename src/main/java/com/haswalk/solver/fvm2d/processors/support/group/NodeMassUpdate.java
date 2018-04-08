@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.haswalk.hasutil.arr.*;
-import com.haswalk.hasutil.Geom;
+import static com.haswalk.util.arr.Arr.*;
 import com.haswalk.solver.fvm2d.processors.Processor;
+import com.haswalk.util.cg.Geom;
 
 public class NodeMassUpdate implements Processor {
 	private List<List<Integer>> nodesE;

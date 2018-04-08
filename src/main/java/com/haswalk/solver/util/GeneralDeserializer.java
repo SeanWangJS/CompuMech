@@ -40,7 +40,7 @@ public class GeneralDeserializer {
 	private Object deJsonArray(JsonArray jsonArr, Class<?> containerType, Class<?> componentType){
 		Object arr = null;
 		try {
-			arr = containerType.newInstance();
+			arr = containerType.getDeclaredConstructor().newInstance();
 			Method addMethod = containerType.getMethod("add", Object.class);
 			for(int i = 0; i < jsonArr.size(); i++) {
 				JsonElement je = jsonArr.get(i);
@@ -58,7 +58,7 @@ public class GeneralDeserializer {
 	private Object deJsonMap(JsonElement jsonElem, Class<?> containerType, Class<?> keyType, Class<?> valueType){
 		Object arr = null;
 		try {
-			arr = containerType.newInstance();
+			arr = containerType.getDeclaredConstructor().newInstance();
 			Method putMethod = containerType.getMethod("put", Object.class, Object.class);
 			for(Entry<String, JsonElement> e: jsonElem.getAsJsonObject().entrySet()) {
 				if(e.getValue().isJsonPrimitive()) {
@@ -121,7 +121,11 @@ public class GeneralDeserializer {
 	private Object deObject(JsonObject jsonObj, Class<?> clazz) {
 		Object obj = null;
 		try {
-			obj = clazz.newInstance();
+			try {
+				obj = clazz.getDeclaredConstructor().newInstance();
+			} catch (InvocationTargetException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

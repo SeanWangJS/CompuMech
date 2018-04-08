@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.haswalk.hasutil.IO;
 import com.haswalk.solver.util.GeneralDeserializer;
 import com.haswalk.solver.util.testresource.*;
+import com.haswalk.util.io.IO;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -83,7 +83,7 @@ public class MTest {
 		
 		Class<?> clazz = ArrayList.class;
 		try {
-			Object o = clazz.newInstance();
+			Object o = clazz.getDeclaredConstructor().newInstance();
 			Method method = clazz.getMethod("add", Object.class);
 			method.invoke(o, 10);
 			method.invoke(o, "s");
@@ -165,7 +165,11 @@ public class MTest {
 		Object obj = null;
 		try {
 			clazz = Class.forName(D.class.getName());
-			obj = clazz.newInstance();
+			try {
+				obj = clazz.getDeclaredConstructor().newInstance();
+			} catch (InvocationTargetException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

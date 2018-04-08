@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.haswalk.hasutil.IO;
-
 public class FileLoad extends Load{
 	private String uri;
 

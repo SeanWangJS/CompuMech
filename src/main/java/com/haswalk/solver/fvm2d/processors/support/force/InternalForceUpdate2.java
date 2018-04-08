@@ -1,6 +1,6 @@
 package com.haswalk.solver.fvm2d.processors.support.force;
 
-import static com.haswalk.hasutil.arr.*;
+import static com.haswalk.util.arr.Arr.*;
 
 import java.util.List;
 

@@ -29,6 +29,8 @@ public class StressBoundaryApply extends LoadBoundaryApply{
 			double[] p2 = vertices.get(n2id);
 			double fx = - value * (p2[1] - p1[1]) / 2.0;
 			double fy = value * (p2[0] - p1[0]) / 2.0;
+//			double fx = - value * (p2[1] - p1[1]) / 2.0 / 4.0;
+//			double fy = value * (p2[0] - p1[0]) / 2.0 / 4.0;
 			forceX[n1id] += fx;
 			forceY[n1id] += fy;
 			forceX[n2id] += fx;

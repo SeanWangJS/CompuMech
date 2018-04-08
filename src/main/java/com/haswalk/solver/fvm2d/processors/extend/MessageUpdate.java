@@ -18,9 +18,9 @@ public class MessageUpdate implements Processor{
 		int count = time.getCount();
 		double currentTime = time.getCurrentTime();
 		double timeStep = time.getTimeStep();
-//		System.out.println(time.getCount() + ": " + time.getCurrentTime() + ": " + time.getTimeStep());
-		System.out.print("Circle: " + count +"\t|Time step: " + format.format(timeStep)
-				+ "\t|Current time: " + format.format(currentTime)+ "\r");
+		System.out.println(time.getCount() + ": " + time.getCurrentTime() + ": " + time.getTimeStep());
+//		System.out.print("Circle: " + count +"\t|Time step: " + format.format(timeStep)
+//				+ "\t|Current time: " + format.format(currentTime)+ "\r");
 //		System.out.println(now - s);
 		s = now;
 	}

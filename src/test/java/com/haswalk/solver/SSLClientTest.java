@@ -67,10 +67,10 @@ public class SSLClientTest {
 
     @Test
     public void test() throws IOException {
-        String config = new String(Files.readAllBytes(Paths.get("E:/fvm/12/config.json")));
+        String config = new String(Files.readAllBytes(Paths.get("E:/fvm/8/config.json")));
 
         try {
-            connect().run(config, "E:/fvm/12/mesh.txt");
+            connect().run(config, "E:/fvm/8/mesh.txt");
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }

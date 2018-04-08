@@ -3,13 +3,10 @@ package com.haswalk.solver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
-import com.haswalk.hasutil.IO;
-import org.junit.Before;
+import com.haswalk.util.io.IO;
 import org.junit.Test;
 
-import com.haswalk.solver.Solver;
 import com.haswalk.solver.fvm2d.FVM2DSolverBuilder;
 
 public class SolverTest {
@@ -18,10 +15,10 @@ public class SolverTest {
 	public void test() throws IOException {
 		String config = new String(
 				Files.readAllBytes(Paths
-						.get("E:/fvm/29/config.json")));
+						.get("E:/fvm/point-force-quad-mesh/config.json")));
 		String mesh = new String(
 				Files.readAllBytes(Paths
-						.get("E:/fvm/29/mesh.txt"))
+						.get("E:/fvm/point-force-tri-mesh/mesh.txt"))
 		);
 
 		IO.write(mesh, System.getProperty("user.dir") +  "/src/resources/mesh.txt");
